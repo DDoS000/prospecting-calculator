@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining Game Data Viewer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏗️ Mining Game Data Viewer</h1>
+            <nav>
+                <button class="nav-btn active" data-tab="equipment">Equipment</button>
+                <button class="nav-btn" data-tab="calculator">Calculator</button>
+                <button class="nav-btn" data-tab="ores">Ores</button>
+                <button class="nav-btn" data-tab="zones">Zones</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Equipment Tab -->
+            <div id="equipment" class="tab-content active">
+                <h2>🛠️ Equipment & Crafting</h2>
+                <div class="search-box">
+                    <input type="text" id="equipment-search" placeholder="ค้นหา equipment...">
+                </div>
+                <div id="equipment-list" class="grid-container"></div>
+            </div>
+
+            <!-- Calculator Tab -->
+            <div id="calculator" class="tab-content">
+                <h2>🧮 Material Calculator</h2>
+                <div class="calculator-container">
+                    <div class="equipment-selector">
+                        <h3>เลือก Equipment ที่ต้องการ Craft</h3>
+                        
+                        <!-- Player Capability Settings -->
+                        <div class="player-capability">
+                            <h4>⚒️ ความสามารถของผู้เล่น</h4>
+                            <div class="capability-input">
+                                <label for="shovel-level">Shovel Toughness ที่ขุดได้:</label>
+                                <select id="shovel-level">
+                                    <option value="1">Level 1 - เริ่มต้น</option>
+                                    <option value="2">Level 2 - ปานกลาง</option>
+                                    <option value="3" selected>Level 3 - ดี</option>
+                                    <option value="4">Level 4 - เก่ง</option>
+                                    <option value="5">Level 5 - เทพ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Multi Equipment Selection -->
+                        <div class="multi-equipment-section">
+                            <div class="equipment-add-section">
+                                <select id="equipment-select">
+                                    <option value="">-- เลือก Equipment --</option>
+                                </select>
+                                <div class="quantity-input">
+                                    <label for="quantity">จำนวน:</label>
+                                    <input type="number" id="quantity" value="1" min="1" max="100">
+                                </div>
+                                <button id="add-equipment-btn">เพิ่ม Equipment</button>
+                            </div>
+                            
+                            <div id="selected-equipment-list" class="selected-equipment-list">
+                                <h4>📋 Equipment ที่เลือก</h4>
+                                <div id="equipment-items"></div>
+                            </div>
+                        </div>
+
+                        <button id="calculate-btn">คำนวณ Materials ทั้งหมด</button>
+                        <button id="clear-all-btn" class="clear-btn">ล้างทั้งหมด</button>
+                    </div>
+
+                    <div id="calculation-result" class="calculation-result" style="display: none;">
+                        <h3>📋 Materials ที่ต้องใช้</h3>
+                        <div id="materials-list"></div>
+                        
+                        <h3>📊 การวิเคราะห์ค่าใช้จ่าย</h3>
+                        <div id="total-cost"></div>
+                        
+                        <h3>🗺️ Farming Route แนะนำ</h3>
+                        <div id="farming-route"></div>
+                        
+                        <h3>⚡ Farming Efficiency</h3>
+                        <div id="farming-efficiency"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ores Tab -->
+            <div id="ores" class="tab-content">
+                <h2>💎 Ores & Minerals</h2>
+                <div class="filter-controls">
+                    <select id="rarity-filter">
+                        <option value="">All Rarities</option>
+                        <option value="Common">Common</option>
+                        <option value="Uncommon">Uncommon</option>
+                        <option value="Rare">Rare</option>
+                        <option value="Epic">Epic</option>
+                        <option value="Legendary">Legendary</option>
+                        <option value="Mythic">Mythic</option>
+                        <option value="Exotic">Exotic</option>
+                    </select>
+                    <input type="text" id="ore-search" placeholder="ค้นหา ore...">
+                </div>
+                <div id="ores-list" class="grid-container"></div>
+            </div>
+
+            <!-- Zones Tab -->
+            <div id="zones" class="tab-content">
+                <h2>🗺️ Mining Zones</h2>
+                <div id="zones-list" class="grid-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
