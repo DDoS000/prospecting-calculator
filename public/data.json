@@ -1,0 +1,1478 @@
+{
+    "crafting": [
+        {
+            "item": "Gold Ring",
+            "type": "Ring",
+            "rarity": "Common",
+            "materials": "5 Gold",
+            "cost": "2,000",
+            "buffs": "Luck: 0.2-0.7",
+            "bestLocations": "Gold: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta, Crystal Cavern River, Azuralite Oasis, Volcanic Sands, The Magma Furnace"
+        },
+        {
+            "item": "Amethyst Pendant",
+            "type": "Necklace",
+            "rarity": "Common",
+            "materials": "8 Platinum, 2 Amethyst",
+            "cost": "10,000",
+            "buffs": "Luck: 0.5-2, Sell Boost: 0-15%",
+            "bestLocations": "Platinum: Rubble Creek Sands, Rubble Creek Deposits, Fortune River; Amethyst: Rubble Creek Sands, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Garden Glove",
+            "type": "Charm",
+            "rarity": "Common",
+            "materials": "5 Pyrite, 1 Titanium, 5 Gold",
+            "cost": "10,000",
+            "buffs": "Dig Strength: 0.2-1, Capacity: 0-5",
+            "bestLocations": "Pyrite: Rubble Creek Sands; Titanium: Rubble Creek Sands, Rubble Creek Deposits, Fortune River Delta; Gold: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta, Crystal Cavern River, Azuralite Oasis, Volcanic Sands, The Magma Furnace"
+        },
+        {
+            "item": "Titanium Ring",
+            "type": "Ring",
+            "rarity": "Common",
+            "materials": "5 Titanium",
+            "cost": "20,000",
+            "buffs": "Capacity: 1-13",
+            "bestLocations": "Titanium: Rubble Creek Sands, Rubble Creek Deposits, Fortune River Delta"
+        },
+        {
+            "item": "Pearl Necklace",
+            "type": "Necklace",
+            "rarity": "Uncommon",
+            "materials": "8 Pearl",
+            "cost": "22,000",
+            "buffs": "Luck: 1-4, Dig Strength: 0-4",
+            "bestLocations": "Pearl: Sunset Beach, Fortune River Delta, Windswept Beach"
+        },
+        {
+            "item": "Smoke Ring",
+            "type": "Ring",
+            "rarity": "Uncommon",
+            "materials": "4 Smoky Quartz",
+            "cost": "20,000",
+            "buffs": "Modifier Boost: 5-15%",
+            "bestLocations": "Smoky Quartz: Sunset Beach, Fortune River Delta, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Ruby Ring",
+            "type": "Ring",
+            "rarity": "Rare",
+            "materials": "5 Platinum (>0.25kg), 1 Ruby",
+            "cost": "45,000",
+            "buffs": "Luck: 1-3, Size Boost: 0-18%",
+            "bestLocations": "Platinum: Rubble Creek Sands, Rubble Creek Deposits, Fortune River; Ruby: Rubble Creek Sands, Rubble Creek Deposits, Fortune River"
+        },
+        {
+            "item": "Jade Armband",
+            "type": "Armband",
+            "rarity": "Uncommon",
+            "materials": "4 Jade",
+            "cost": "50,000",
+            "buffs": "Luck: 1-8, Capacity: 1-10",
+            "bestLocations": "Jade: Fortune River, Fortune River Delta"
+        },
+        {
+            "item": "Topaz Necklace",
+            "type": "Necklace",
+            "rarity": "Uncommon",
+            "materials": "3 Titanium, 1 Topaz",
+            "cost": "60,000",
+            "buffs": "Luck: 1-5, Dig Strength: 1-4, Shake Strength: 0.2-1",
+            "bestLocations": "Titanium: Rubble Creek Sands, Rubble Creek Deposits, Fortune River Delta; Topaz: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta, Volcanic Sands, Windswept Beach, The Magma Furnace, Infernal Heart (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Lapis Armband",
+            "type": "Armband",
+            "rarity": "Rare",
+            "materials": "2 Lapis Lazuli, 4 Gold (>0.5kg)",
+            "cost": "111,000",
+            "buffs": "Luck: 2-9, Dig Speed: 0-40%, Shake Speed: 0-40%",
+            "bestLocations": "Lapis Lazuli: Rubble Creek Sands, Rubble Creek Deposits, Fortune River; Gold: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta, Crystal Cavern River, Azuralite Oasis, Volcanic Sands, The Magma Furnace"
+        },
+        {
+            "item": "Speed Coil",
+            "type": "Coil",
+            "rarity": "Rare",
+            "materials": "1 Meteoric Iron, 3 Neodymium, 5 Titanium",
+            "cost": "120,000",
+            "buffs": "Dig Speed: 0-70%, Shake Speed: 0-70%",
+            "bestLocations": "Meteoric Iron: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Volcanic Sands, Windswept Beach; Neodymium: Sunset Beach, Fortune River Delta, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Titanium: Rubble Creek Sands, Rubble Creek Deposits, Fortune River Delta"
+        },
+        {
+            "item": "Meteor Ring",
+            "type": "Ring",
+            "rarity": "Rare",
+            "materials": "3 Meteoric Iron",
+            "cost": "150,000",
+            "buffs": "Dig Strength: 0.5-3, Shake Strength: 0-1",
+            "bestLocations": "Meteoric Iron: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Volcanic Sands, Windswept Beach"
+        },
+        {
+            "item": "Opal Amulet",
+            "type": "Amulet",
+            "rarity": "Epic",
+            "materials": "1 Opal, 3 Jade (>0.3kg)",
+            "cost": "400,000",
+            "buffs": "Luck: 2-13, Modifier Boost: 0-90%",
+            "bestLocations": "Opal: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Sunset Beach, Volcanic Sands, Windswept Beach, The Magma Furnace, Infernal Heart (Shovel Toughness 4-5); Jade: Fortune River, Fortune River Delta"
+        },
+        {
+            "item": "Moon Ring",
+            "type": "Ring",
+            "rarity": "Epic",
+            "materials": "1 Moonstone (>0.4kg), 1 Iridium (>0.4kg)",
+            "cost": "500,000",
+            "buffs": "Luck: 1-7, Dig Speed: 10-40%, Shake Speed: 10-40%",
+            "bestLocations": "Moonstone: Sunset Beach, Fortune River Delta; Iridium: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta"
+        },
+        {
+            "item": "Gravity Coil",
+            "type": "Coil",
+            "rarity": "Epic",
+            "materials": "1 Aurorite, 1 Moonstone, 1 Osmium",
+            "cost": "1,000,000",
+            "buffs": "Capacity: 10-140",
+            "bestLocations": "Aurorite: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta; Moonstone: Sunset Beach, Fortune River Delta; Osmium: Rubble Creek Deposits, Fortune River, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Heart of the Ocean",
+            "type": "Ring",
+            "rarity": "Epic",
+            "materials": "10 Coral, 5 Silver Clamshell, 3 Golden Pearl",
+            "cost": "1,000,000",
+            "buffs": "Luck: 3-10, Shake Speed: 0-20%, Sell Boost: 10-20%",
+            "bestLocations": "Coral: Sunset Beach, Fortune River Delta, Windswept Beach; Silver Clamshell: Sunset Beach, Fortune River Delta, Windswept Beach; Golden Pearl: Sunset Beach, Fortune River Delta"
+        },
+        {
+            "item": "Guiding Light",
+            "type": "Charm",
+            "rarity": "Legendary",
+            "materials": "1 Catseye, 2 Golden Pearl",
+            "cost": "1,500,000",
+            "buffs": "Luck: 5-20, Capacity: 10-40, Modifier Boost: 0-45%",
+            "bestLocations": "Catseye: Rubble Creek Deposits, Fortune River, Volcanic Sands, Windswept Beach, The Magma Furnace (Shovel Toughness 4-5); Golden Pearl: Sunset Beach, Fortune River Delta"
+        },
+        {
+            "item": "Lightseeker's Ring",
+            "type": "Ring",
+            "rarity": "Legendary",
+            "materials": "2 Opal, 1 Luminum",
+            "cost": "2,000,000",
+            "buffs": "Dig Speed: 5-25%, Sell Boost: 5-25%, Modifier Boost: 5-25%",
+            "bestLocations": "Opal: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Sunset Beach, Volcanic Sands, Windswept Beach, The Magma Furnace, Infernal Heart (Shovel Toughness 4-5); Luminum: Sunset Beach, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Mass Accumulator",
+            "type": "Coil",
+            "rarity": "Legendary",
+            "materials": "1 Aurorite, 1 Uranium, 2 Osmium",
+            "cost": "3,000,000",
+            "buffs": "Capacity: 20-60, Size Boost: 10-80%",
+            "bestLocations": "Aurorite: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta; Uranium: Fortune River, Fortune River Delta, Azuralite Oasis, Infernal Heart (Shovel Toughness 5); Osmium: Rubble Creek Deposits, Fortune River, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Crown",
+            "type": "Charm",
+            "rarity": "Legendary",
+            "materials": "3 Ruby (>0.25kg), 8 Gold (>1kg), 2 Emerald (>0.2kg), 1 Diamond, 3 Sapphire (>0.25kg)",
+            "cost": "5,000,000",
+            "buffs": "Luck: 5-30, Size Boost: 0-45%, Sell Boost: 0-90%",
+            "bestLocations": "Ruby: Rubble Creek Sands, Rubble Creek Deposits, Fortune River; Gold: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta, Crystal Cavern River, Azuralite Oasis, Volcanic Sands, The Magma Furnace; Emerald: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Diamond: Sunset Beach (highest Legendary chance), Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta; Sapphire: Rubble Creek Deposits, Fortune River"
+        },
+        {
+            "item": "Dragon Claw",
+            "type": "Charm",
+            "rarity": "Legendary",
+            "materials": "5 Ammonite Fossil, 2 Dragon Bone",
+            "cost": "10,000,000",
+            "buffs": "Dig Strength: 10-30, Shake Strength: 1-8",
+            "bestLocations": "Ammonite Fossil: Windswept Beach; Dragon Bone: Windswept Beach, Infernal Heart (Shovel Toughness 5)"
+        },
+        {
+            "item": "Royal Federation Crown",
+            "type": "Charm",
+            "rarity": "Mythical",
+            "materials": "3 Rose Gold (>0.4kg), 5 Golden Pearl (>0.2kg), 1 Pink Diamond",
+            "cost": "30,000,000",
+            "buffs": "Luck: 10-90, Size Boost: 0-90%, Sell Boost: 0-180%",
+            "bestLocations": "Rose Gold: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Volcanic Sands, Windswept Beach, The Magma Furnace, Infernal Heart (Shovel Toughness 4-5); Golden Pearl: Sunset Beach, Fortune River Delta; Pink Diamond: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta, Volcanic Sands (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Phoenix Heart",
+            "type": "Necklace",
+            "rarity": "Mythical",
+            "materials": "3 Uranium, 1 Inferlume, 2 Starshine",
+            "cost": "40,000,000",
+            "buffs": "Luck: 100-300, Size Boost: -70--40%",
+            "bestLocations": "Uranium: Fortune River, Fortune River Delta, Azuralite Oasis, Infernal Heart (Shovel Toughness 5); Inferlume: Sunset Beach, Crystal Cavern River, Azuralite Oasis, Volcanic Sands, Windswept Beach, Infernal Heart (Shovel Toughness 5); Starshine: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Celestial Rings",
+            "type": "Necklace",
+            "rarity": "Mythical",
+            "materials": "1 Vortessence, 8 Meteoric Iron (>0.3kg), 5 Moonstone (>0.3kg), 2 Catseye",
+            "cost": "50,000,000",
+            "buffs": "Luck: 30-90, Capacity: 50-250, Size Boost: 0-45%, Modifier Boost: 20-140%",
+            "bestLocations": "Vortessence: Fortune River Delta, Crystal Cavern River, Azuralite Oasis, Windswept Beach (Shovel Toughness 5); Meteoric Iron: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Volcanic Sands, Windswept Beach; Moonstone: Sunset Beach, Fortune River Delta; Catseye: Rubble Creek Deposits, Fortune River, Volcanic Sands, Windswept Beach, The Magma Furnace (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Apocalypse Bringer",
+            "type": "Ring",
+            "rarity": "Mythical",
+            "materials": "4 Ashvein, 10 Ruby, 2 Palladium, 1 Painite",
+            "cost": "50,000,000",
+            "buffs": "Luck: 10-40, Dig Strength: 5-20, Shake Strength: 2-5, Sell Boost: 10-50%",
+            "bestLocations": "Ashvein: Sunset Beach, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Ruby: Rubble Creek Sands, Rubble Creek Deposits, Fortune River; Palladium: Fortune River, Fortune River Delta, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Painite: Sunset Beach (highest Mythical chance), Fortune River, Fortune River Delta, Infernal Heart (Shovel Toughness 5)"
+        },
+        {
+            "item": "Mythril Ring",
+            "type": "Ring",
+            "rarity": "Mythical",
+            "materials": "2 Tourmaline, 2 Cinnabar, 1 Starshine, 1 Mythril",
+            "cost": "60,000,000",
+            "buffs": "Luck: 20-80, Dig Speed: 20-40%, Shake Speed: 20-40%, Sell Boost: 5-24%",
+            "bestLocations": "Tourmaline: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 5); Cinnabar: Volcanic Sands, The Magma Furnace, Infernal Heart (Shovel Toughness 5); Starshine: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Mythril: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 5)"
+        },
+        {
+            "item": "Phoenix Wings",
+            "type": "Charm",
+            "rarity": "Mythical",
+            "materials": "1 Flarebloom, 2 Cinnabar, 2 Fire Opal",
+            "cost": "65,000,000",
+            "buffs": "Luck: 100-300, Capacity: -80--40",
+            "bestLocations": "Flarebloom: Volcanic Sands, The Magma Furnace, Infernal Heart (Shovel Toughness 5); Cinnabar: Volcanic Sands, The Magma Furnace, Infernal Heart (Shovel Toughness 5); Fire Opal: Volcanic Sands (highest Legendary chance), The Magma Furnace, Infernal Heart (Shovel Toughness 5)"
+        },
+        {
+            "item": "Prismatic Star",
+            "type": "Ring",
+            "rarity": "Mythical",
+            "materials": "1 Diamond, 1 Prismara, 1 Pink Diamond, 5 Borealite, 1 Luminum, 1 Starshine",
+            "cost": "75,000,000",
+            "buffs": "Luck: 5-20, Dig Strength: 2-10, Capacity: 10-40, Dig Speed: 5-20%, Shake Strength: 1-3, Shake Speed: 5-20%, Sell Boost: 10-20%, Size Boost: 5-20%, Modifier Boost: 5-20%",
+            "bestLocations": "Diamond: Sunset Beach (highest Legendary chance), Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta; Prismara: Azuralite Oasis (Shovel Toughness 5); Pink Diamond: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Fortune River Delta, Volcanic Sands (Shovel Toughness 4-5); Borealite: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Luminum: Sunset Beach, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Starshine: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5)"
+        },
+        {
+            "item": "Cryogenic Preserver",
+            "type": "Charm",
+            "rarity": "Mythical",
+            "materials": "5 Borealite, 1 Frosthard, 3 Aetherite, 1 Mythril",
+            "cost": "75,000,000",
+            "buffs": "Luck: 100-250, Shake Strength: 10-40, Shake Speed: -40--20%, Sell Boost: 0-50%",
+            "bestLocations": "Borealite: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Frosthard: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 5); Aetherite: Rubble Creek Sands, Rubble Creek Deposits, Fortune River, Sunset Beach, Fortune River Delta, Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Mythril: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 5)"
+        },
+        {
+            "item": "Solar Ring",
+            "type": "Ring",
+            "rarity": "Mythical",
+            "materials": "1 Vortessence, 2 Fire Opal, 1 Volcanic Core, 10 Pyronium",
+            "cost": "90,000,000",
+            "buffs": "Luck: 20-100, Dig Strength: 2-8, Dig Speed: -30--10%, Shake Strength: 0-2, Shake Speed: -30--10%, Modifier Boost: 5-20%",
+            "bestLocations": "Vortessence: Fortune River Delta, Crystal Cavern River, Azuralite Oasis, Windswept Beach (Shovel Toughness 5); Fire Opal: Volcanic Sands (highest Legendary chance), The Magma Furnace, Infernal Heart (Shovel Toughness 5); Volcanic Core: The Magma Furnace, Infernal Heart (Shovel Toughness 5); Pyronium: Volcanic Sands, The Magma Furnace, Infernal Heart (Shovel Toughness 5)"
+        },
+        {
+            "item": "Fossilized Crown",
+            "type": "Charm",
+            "rarity": "Mythical",
+            "materials": "1 Dinosaur Skull, 5 Cinnabar, 1 Volcanic Core, 5 Dragon Bone",
+            "cost": "100,000,000",
+            "buffs": "Luck: 50-200, Capacity: 50-200, Shake Speed: 10-30%, Size Boost: 0-50%, Sell Boost: 0-100%",
+            "bestLocations": "Dinosaur Skull: Windswept Beach, Infernal Heart (Shovel Toughness 5); Cinnabar: Volcanic Sands, The Magma Furnace, Infernal Heart (Shovel Toughness 5); Volcanic Core: The Magma Furnace, Infernal Heart (Shovel Toughness 5); Dragon Bone: Windswept Beach, Infernal Heart (Shovel Toughness 5)"
+        },
+        {
+            "item": "Frostthorn Pendant",
+            "type": "Necklace",
+            "rarity": "Mythical",
+            "materials": "10 Cobalt, 5 Tourmaline, 2 Frosthard, 5 Aquamarine, 1 Cryonic Artifact",
+            "cost": "200,000,000",
+            "buffs": "Luck: 100-400, Dig Strength: 100-200, Capacity: 50-200, Dig Speed: -50--30%, Size Boost: 30-100%",
+            "bestLocations": "Cobalt: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 4-5); Tourmaline: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 5); Frosthard: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 5); Aquamarine: Sunset Beach, Fortune River Delta, Windswept Beach; Cryonic Artifact: Crystal Cavern River, Azuralite Oasis (Shovel Toughness 5)"
+        }
+    ],
+    "locations": [
+        {
+            "name": "Rubble Creek Sands",
+            "description": "Starting area with basic minerals, good for beginners.",
+            "shovelToughness": 1
+        },
+        {
+            "name": "Rubble Creek Deposits",
+            "description": "Mining area with slightly rarer minerals than Rubble Creek Sands.",
+            "shovelToughness": 2
+        },
+        {
+            "name": "Fortune River",
+            "description": "River area for panning and digging, contains mid-tier minerals.",
+            "shovelToughness": 2
+        },
+        {
+            "name": "Fortune River Delta",
+            "description": "Coastal area with access to sea-related minerals.",
+            "shovelToughness": 3
+        },
+        {
+            "name": "Sunset Beach",
+            "description": "Beach area with coral and pearls, good for mid-tier resources.",
+            "shovelToughness": 3
+        },
+        {
+            "name": "Crystal Cavern River",
+            "description": "Cave area with rare gems and minerals, requires better shovels.",
+            "shovelToughness": 4
+        },
+        {
+            "name": "Azuralite Oasis",
+            "description": "High-tier area with rare and epic minerals, challenging to access.",
+            "shovelToughness": 5
+        },
+        {
+            "name": "Volcanic Sands",
+            "description": "Volcanic area with heat-resistant minerals, good for late-game.",
+            "shovelToughness": 4
+        },
+        {
+            "name": "Windswept Beach",
+            "description": "Windy coastal area with fossils and sea minerals.",
+            "shovelToughness": 3
+        },
+        {
+            "name": "The Magma Furnace",
+            "description": "Extreme heat area with rare volcanic minerals, late-game.",
+            "shovelToughness": 5
+        },
+        {
+            "name": "Infernal Heart",
+            "description": "End-game area, open at XX:15 hourly, with exotic and mythical minerals.",
+            "shovelToughness": 5
+        },
+        {
+            "name": "Volcano Regions",
+            "description": "Areas with lava and meteor showers, ideal for volcanic minerals.",
+            "shovelToughness": 5
+        },
+        {
+            "name": "Fire-themed Dig Areas",
+            "description": "Specialized areas with high-heat nodes for fire-based minerals.",
+            "shovelToughness": 5
+        },
+        {
+            "name": "Lava-based Panning Zones",
+            "description": "Panning areas near lava for exotic minerals like Vortessence.",
+            "shovelToughness": 5
+        }
+    ],
+    "minerals": [
+        {
+            "name": "Amethyst",
+            "rarity": "Common",
+            "locations": [
+                "Rubble Creek Sands",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$3,500",
+            "description": "A purple amethyst gemstone.",
+            "dropChances": {
+                "Azuralite Oasis": "(4.62233721% or ~1 in 22)",
+                "Rubble Creek Sands": "(4.38941985% or ~1 in 23)",
+                "Crystal Cavern River": "(4.23118283% or ~1 in 24)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Amethyst"
+        },
+        {
+            "name": "Blue Ice",
+            "rarity": "Common",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ]
+        },
+        {
+            "name": "Copper",
+            "rarity": "Common",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis",
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$800",
+            "description": "A malleable metal commonly used in electronics.",
+            "dropChances": {
+                "Azuralite Oasis": "(36.97869766% or ~1 in 3)",
+                "Crystal Cavern River": "(33.84946261% or ~1 in 3)",
+                "Infernal Heart": "(22.10466356% or ~1 in 5)",
+                "The Magma Furnace": "(17.07292935% or ~1 in 6)",
+                "Volcanic Sands": "(16.73064195% or ~1 in 6)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Copper"
+        },
+        {
+            "name": "Gold",
+            "rarity": "Common",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis",
+                "Volcanic Sands",
+                "The Magma Furnace"
+            ],
+            "value": "$1,000",
+            "description": "A nugget of gold.",
+            "dropChances": {
+                "Rubble Creek Sands": "(65.84129772% or ~1 in 2)",
+                "Rubble Creek Deposits": "(61.77423383% or ~1 in 2)",
+                "Fortune River": "(57.39392441% or ~1 in 2)",
+                "Fortune River Delta": "(54.71596192% or ~1 in 2)",
+                "Crystal Cavern River": "(42.31182826% or ~1 in 2)",
+                "Azuralite Oasis": "(36.97869766% or ~1 in 3)",
+                "The Magma Furnace": "(34.14585870% or ~1 in 3)",
+                "Volcanic Sands": "(33.46128389% or ~1 in 3)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Gold"
+        },
+        {
+            "name": "Obsidian",
+            "rarity": "Common",
+            "locations": [
+                "Volcanic Sands",
+                "Windswept Beach",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$3,000",
+            "description": "A jet-black shard of obsidian. Formed when lava cools rapidly.",
+            "dropChances": {
+                "Infernal Heart": "(73.68221188% or ~1 in 2)",
+                "The Magma Furnace": "(45.52781160% or ~1 in 2)",
+                "Volcanic Sands": "(44.61504519% or ~1 in 2)",
+                "Windswept Beach": "(24.10792685% or ~1 in 4)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Obsidian"
+        },
+        {
+            "name": "Pearl",
+            "rarity": "Common",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Windswept Beach"
+            ],
+            "value": "$5,000",
+            "description": "A round pearl from an oyster.",
+            "dropChances": {
+                "Windswept Beach": "(18.08094514% or ~1 in 6)",
+                "Sunset Beach": "(16.99940576% or ~1 in 6)",
+                "Fortune River Delta": "(10.94319238% or ~1 in 9)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Pearl"
+        },
+        {
+            "name": "Platinum",
+            "rarity": "Common",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River"
+            ],
+            "value": "$2,000",
+            "description": "A nugget of platinum.",
+            "dropChances": {
+                "Rubble Creek Deposits": "(30.88711692% or ~1 in 3)",
+                "Fortune River": "(28.69696220% or ~1 in 3)",
+                "Rubble Creek Sands": "(13.16825954% or ~1 in 8)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Platinum"
+        },
+        {
+            "name": "Pyrite",
+            "rarity": "Common",
+            "locations": [
+                "Rubble Creek Sands"
+            ],
+            "value": "$500",
+            "description": "Also known as \"Fool's Gold\". Essentially worthless.",
+            "dropChances": {
+                "Rubble Creek Sands": "(13.16825956% or ~1 in 8)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Pyrite"
+        },
+        {
+            "name": "Seashell",
+            "rarity": "Common",
+            "locations": [
+                "Sunset Beach",
+                "Windswept Beach"
+            ],
+            "value": "$2,200",
+            "description": "The shell of a clam.",
+            "dropChances": {
+                "Windswept Beach": "(48.21585370% or ~1 in 2)",
+                "Sunset Beach": "(45.33174870% or ~1 in 2)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Seashell"
+        },
+        {
+            "name": "Silver",
+            "rarity": "Common",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$700",
+            "description": "A nugget of silver.",
+            "dropChances": {
+                "Sunset Beach": "(28.33234294% or ~1 in 4)",
+                "Fortune River Delta": "(27.35798096% or ~1 in 4)",
+                "Azuralite Oasis": "(18.48934883% or ~1 in 5)",
+                "Crystal Cavern River": "(16.92473130% or ~1 in 6)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Silver"
+        },
+        {
+            "name": "Coral",
+            "rarity": "Uncommon",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Windswept Beach"
+            ],
+            "value": "$23,000",
+            "description": "A piece of coral from an endangered species.",
+            "dropChances": {
+                "Windswept Beach": "(6.02698171% or ~1 in 17)",
+                "Sunset Beach": "(5.66646859% or ~1 in 18)",
+                "Fortune River Delta": "(3.28295772% or ~1 in 30)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Coral"
+        },
+        {
+            "name": "Malachite",
+            "rarity": "Uncommon",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis",
+                "Windswept Beach"
+            ],
+            "value": "$18,000",
+            "description": "A vibrant green crystal, given its color by the copper within it.",
+            "dropChances": {
+                "Windswept Beach": "(1.20539634% or ~1 in 83)",
+                "Azuralite Oasis": "(0.09244674% or ~1 in 1,082)",
+                "Crystal Cavern River": "(0.08462366% or ~1 in 1,182)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Malachite"
+        },
+        {
+            "name": "Neodymium",
+            "rarity": "Uncommon",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$10,000",
+            "description": "A key ingredient in high-strength magnets.",
+            "dropChances": {
+                "Sunset Beach": "(2.26658744% or ~1 in 44)",
+                "Fortune River Delta": "(1.64147886% or ~1 in 61)",
+                "Azuralite Oasis": "(1.38670116% or ~1 in 72)",
+                "Crystal Cavern River": "(1.26935485% or ~1 in 79)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Neodymium"
+        },
+        {
+            "name": "Sapphire",
+            "rarity": "Uncommon",
+            "locations": [
+                "Rubble Creek Deposits",
+                "Fortune River"
+            ],
+            "value": "$25,000",
+            "description": "A blue sapphire.",
+            "dropChances": {
+                "Rubble Creek Deposits": "(0.61774234% or ~1 in 162)",
+                "Fortune River": "(0.57393924% or ~1 in 174)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Sapphire"
+        },
+        {
+            "name": "Smoky Quartz",
+            "rarity": "Uncommon",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$16,000",
+            "description": "A type of quartz with a unique gray color.",
+            "dropChances": {
+                "Sunset Beach": "(1.13329372% or ~1 in 88)",
+                "Fortune River Delta": "(1.09431924% or ~1 in 91)",
+                "Azuralite Oasis": "(0.92446744% or ~1 in 108)",
+                "Crystal Cavern River": "(0.84623657% or ~1 in 118)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Smoky_Quartz"
+        },
+        {
+            "name": "Titanium",
+            "rarity": "Uncommon",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River Delta"
+            ],
+            "value": "$7,500",
+            "description": "A piece of pure titanium.",
+            "dropChances": {
+                "Fortune River": "(11.47878488% or ~1 in 9)",
+                "Rubble Creek Deposits": "(4.94193871% or ~1 in 20)",
+                "Rubble Creek Sands": "(2.19470992% or ~1 in 46)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Titanium"
+        },
+        {
+            "name": "Topaz",
+            "rarity": "Uncommon",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Fortune River Delta",
+                "Volcanic Sands",
+                "Windswept Beach",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$14,000",
+            "description": "A topaz gemstone. a symbol of strength and honor.",
+            "dropChances": {
+                "Infernal Heart": "(2.21046636% or ~1 in 45)",
+                "Windswept Beach": "(1.80809451% or ~1 in 55)",
+                "The Magma Furnace": "(1.70729294% or ~1 in 59)",
+                "Volcanic Sands": "(1.67306419% or ~1 in 60)",
+                "Fortune River": "(1.43484811% or ~1 in 70)",
+                "Rubble Creek Deposits": "(1.23548468% or ~1 in 81)",
+                "Rubble Creek Sands": "(1.09735496% or ~1 in 91)",
+                "Fortune River Delta": "(0.54715962% or ~1 in 183)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Topaz"
+        },
+        {
+            "name": "Zircon",
+            "rarity": "Uncommon",
+            "locations": [
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$25,000",
+            "description": "A dark orange gemstone that contains zirconium.",
+            "dropChances": {
+                "Infernal Heart": "(1.47364424% or ~1 in 68)",
+                "The Magma Furnace": "(1.13819529% or ~1 in 88)",
+                "Volcanic Sands": "(1.11537613% or ~1 in 90)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Zircon"
+        },
+        {
+            "name": "Azuralite",
+            "rarity": "Rare",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$120,000",
+            "description": "A mysterious azure crystal with strange growth properties and unknown origin.",
+            "dropChances": {
+                "Azuralite Oasis": "(0.46223372% or ~1 in 216)",
+                "Crystal Cavern River": "(0.42311828% or ~1 in 236)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Azuralite"
+        },
+        {
+            "name": "Glacial Quartz",
+            "rarity": "Rare",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ]
+        },
+        {
+            "name": "Jade",
+            "rarity": "Rare",
+            "locations": [
+                "Fortune River",
+                "Fortune River Delta"
+            ],
+            "value": "$40,000",
+            "description": "A piece of green jade.",
+            "dropChances": {
+                "Fortune River": "(0.28696962% or ~1 in 348)",
+                "Fortune River Delta": "(0.21886385% or ~1 in 457)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Jade"
+        },
+        {
+            "name": "Lapis Lazuli",
+            "rarity": "Rare",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River"
+            ],
+            "value": "$40,000",
+            "description": "A vibrant and intense stone of lapis lazuli.",
+            "dropChances": {
+                "Rubble Creek Deposits": "(0.15443558% or ~1 in 648)",
+                "Fortune River": "(0.10330906% or ~1 in 968)",
+                "Rubble Creek Sands": "(0.08778840% or ~1 in 1,139)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Lapis_Lazuli"
+        },
+        {
+            "name": "Meteoric Iron",
+            "rarity": "Rare",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Volcanic Sands",
+                "Windswept Beach"
+            ],
+            "value": "$80,000",
+            "description": "A piece of iron infused with energy from exposure to the meteors.",
+            "dropChances": {
+                "Volcanic Sands": "(2.23075226% or ~1 in 45)",
+                "Windswept Beach": "(0.24107927% or ~1 in 415)",
+                "Rubble Creek Deposits": "(0.07412908% or ~1 in 1,349)",
+                "Fortune River": "(0.05739392% or ~1 in 1,742)",
+                "Rubble Creek Sands": "(0.03072594% or ~1 in 3,255)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Meteoric_Iron"
+        },
+        {
+            "name": "Onyx",
+            "rarity": "Rare",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis",
+                "Volcanic Sands",
+                "Windswept Beach",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$75,000",
+            "description": "A jet black onyx gem.",
+            "dropChances": {
+                "Infernal Heart": "(0.14736442% or ~1 in 679)",
+                "Windswept Beach": "(0.12053963% or ~1 in 830)",
+                "The Magma Furnace": "(0.11381953% or ~1 in 879)",
+                "Volcanic Sands": "(0.11153761% or ~1 in 897)",
+                "Sunset Beach": "(0.05666469% or ~1 in 1,765)",
+                "Fortune River Delta": "(0.05471596% or ~1 in 1,828)",
+                "Azuralite Oasis": "(0.04622337% or ~1 in 2,163)",
+                "Crystal Cavern River": "(0.04231183% or ~1 in 2,363)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Onyx"
+        },
+        {
+            "name": "Peridot",
+            "rarity": "Rare",
+            "locations": [
+                "Volcanic Sands",
+                "Windswept Beach",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$60,000",
+            "description": "An olive-green gemstone that commonly appears in volcanic rock.",
+            "dropChances": {
+                "Infernal Heart": "(0.07368221% or ~1 in 1,357)",
+                "Windswept Beach": "(0.06026982% or ~1 in 1,659)",
+                "The Magma Furnace": "(0.05690976% or ~1 in 1,757)",
+                "Volcanic Sands": "(0.05576881% or ~1 in 1,793)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Peridot"
+        },
+        {
+            "name": "Pyrelith",
+            "rarity": "Rare",
+            "locations": [
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$150,000",
+            "description": "An energetic crystal formed in the heart of a volcano.",
+            "dropChances": {
+                "Infernal Heart": "(0.29472885% or ~1 in 339)",
+                "The Magma Furnace": "(0.22763906% or ~1 in 439)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Pyrelith"
+        },
+        {
+            "name": "Ruby",
+            "rarity": "Rare",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River"
+            ],
+            "value": "$30,000",
+            "description": "A bright red ruby gemstone.",
+            "dropChances": {
+                "Rubble Creek Deposits": "(0.24709694% or ~1 in 405)",
+                "Fortune River": "(0.22957570% or ~1 in 436)",
+                "Rubble Creek Sands": "(0.21947099% or ~1 in 456)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Ruby"
+        },
+        {
+            "name": "Silver Clamshell",
+            "rarity": "Rare",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Windswept Beach"
+            ],
+            "value": "$50,000",
+            "description": "The shell of a rare silver clam.",
+            "dropChances": {
+                "Windswept Beach": "(0.18080945% or ~1 in 553)",
+                "Sunset Beach": "(0.16999406% or ~1 in 588)",
+                "Fortune River Delta": "(0.10943192% or ~1 in 914)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Silver_Clamshell"
+        },
+        {
+            "name": "Ammonite Fossil",
+            "rarity": "Epic",
+            "locations": [
+                "Windswept Beach"
+            ],
+            "value": "$200,000",
+            "description": "The remains of an ancient mollusk.",
+            "dropChances": {
+                "Windswept Beach": "(0.00602698% or ~1 in 16,592)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Ammonite_Fossil"
+        },
+        {
+            "name": "Ashvein",
+            "rarity": "Epic",
+            "locations": [
+                "Sunset Beach",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$222,000",
+            "description": "An obsidian-like crystal streaked with red.",
+            "dropChances": {
+                "Sunset Beach": "(0.01133294% or ~1 in 8,824)",
+                "Azuralite Oasis": "(0.00924467% or ~1 in 10,817)",
+                "Crystal Cavern River": "(0.00846237% or ~1 in 11,817)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Ashvein"
+        },
+        {
+            "name": "Aurorite",
+            "rarity": "Epic",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Fortune River Delta"
+            ],
+            "value": "$444,444",
+            "description": "A mysterious crystal filled with magical power. Perhaps I could use this for something...",
+            "dropChances": {
+                "Rubble Creek Deposits": "(0.00926614% or ~1 in 10,792)",
+                "Fortune River": "(0.00860909% or ~1 in 11,616)",
+                "Fortune River Delta": "(0.00547160% or ~1 in 18,276)",
+                "Rubble Creek Sands": "(0.00526730% or ~1 in 18,985)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Aurorite"
+        },
+        {
+            "name": "Borealite",
+            "rarity": "Epic",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$280,000",
+            "description": "A cold gemstone.",
+            "dropChances": {
+                "Azuralite Oasis": "(0.00462234% or ~1 in 21,634)",
+                "Crystal Cavern River": "(0.00423118% or ~1 in 23,534)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Borealite"
+        },
+        {
+            "name": "Cobalt",
+            "rarity": "Epic",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ]
+        },
+        {
+            "name": "Emerald",
+            "rarity": "Epic",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$250,000",
+            "description": "A rare emerald with a vibrant green hue.",
+            "dropChances": {
+                "Rubble Creek Deposits": "(0.00494194% or ~1 in 20,235)",
+                "Fortune River": "(0.00459151% or ~1 in 21,779)",
+                "Azuralite Oasis": "(0.00277340% or ~1 in 36,057)",
+                "Crystal Cavern River": "(0.00253871% or ~1 in 39,390)",
+                "Rubble Creek Sands": "(0.00219471% or ~1 in 45,564)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Emerald"
+        },
+        {
+            "name": "Golden Pearl",
+            "rarity": "Epic",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta"
+            ],
+            "value": "$250,000",
+            "description": "An incredibly rare pearl variant with a distinct gold color.",
+            "dropChances": {
+                "Sunset Beach": "(0.02266587% or ~1 in 4,412)",
+                "Fortune River Delta": "(0.01641479% or ~1 in 6,092)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Golden_Pearl"
+        },
+        {
+            "name": "Iridium",
+            "rarity": "Epic",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Fortune River Delta"
+            ],
+            "value": "$150,000",
+            "description": "A rare celestial metal brought to the earth by the meteors.",
+            "dropChances": {
+                "Rubble Creek Deposits": "(0.01853227% or ~1 in 5,369)",
+                "Rubble Creek Sands": "(0.01316826% or ~1 in 7,594)",
+                "Fortune River": "(0.00860909% or ~1 in 11,616)",
+                "Fortune River Delta": "(0.00547160% or ~1 in 18,276)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Iridium"
+        },
+        {
+            "name": "Moonstone",
+            "rarity": "Epic",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta"
+            ],
+            "value": "$200,000",
+            "description": "A piece of stone from the moon itself.",
+            "dropChances": {
+                "Sunset Beach": "(0.00566647% or ~1 in 17,648)",
+                "Fortune River Delta": "(0.00547160% or ~1 in 18,276)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Moonstone"
+        },
+        {
+            "name": "Opal",
+            "rarity": "Epic",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Sunset Beach",
+                "Volcanic Sands",
+                "Windswept Beach",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$325,000",
+            "description": "An iridescent opal.",
+            "dropChances": {
+                "Fortune River": "(0.00229576% or ~1 in 43,559)",
+                "Sunset Beach": "(0.00226659% or ~1 in 44,119)",
+                "Infernal Heart": "(0.00221047% or ~1 in 45,239)",
+                "Rubble Creek Deposits": "(0.00185323% or ~1 in 53,960)",
+                "Windswept Beach": "(0.00180809% or ~1 in 55,307)",
+                "The Magma Furnace": "(0.00170729% or ~1 in 58,572)",
+                "Volcanic Sands": "(0.00167306% or ~1 in 59,771)",
+                "Rubble Creek Sands": "(0.00087788% or ~1 in 113,910)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Opal"
+        },
+        {
+            "name": "Osmium",
+            "rarity": "Epic",
+            "locations": [
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$300,000",
+            "description": "A dense and highly toxic metal prized for its rarity.",
+            "dropChances": {
+                "Infernal Heart": "(0.00221047% or ~1 in 45,239)",
+                "Windswept Beach": "(0.00180809% or ~1 in 55,307)",
+                "The Magma Furnace": "(0.00170729% or ~1 in 58,572)",
+                "Volcanic Sands": "(0.00167306% or ~1 in 59,771)",
+                "Fortune River": "(0.00143485% or ~1 in 69,694)",
+                "Azuralite Oasis": "(0.00138670% or ~1 in 72,114)",
+                "Crystal Cavern River": "(0.00126935% or ~1 in 78,780)",
+                "Rubble Creek Deposits": "(0.00123548% or ~1 in 80,940)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Osmium"
+        },
+        {
+            "name": "Pyronium",
+            "rarity": "Epic",
+            "locations": [
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$226,000",
+            "description": "A volcanic metal that constantly emits heat.",
+            "dropChances": {
+                "Infernal Heart": "(0.00442093% or ~1 in 22,620)",
+                "The Magma Furnace": "(0.00341459% or ~1 in 29,286)",
+                "Volcanic Sands": "(0.00334613% or ~1 in 29,885)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Pyronium"
+        },
+        {
+            "name": "Aetherite",
+            "rarity": "Legendary",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$4,444,444",
+            "description": "A purified variant of aurorite used in enchanting rituals.",
+            "dropChances": {
+                "Fortune River Delta": "(0.00013679% or ~1 in 731,048)",
+                "Crystal Cavern River": "(0.00012694% or ~1 in 787,802)",
+                "Azuralite Oasis": "(0.00011556% or ~1 in 865,363)",
+                "Sunset Beach": "(0.00011333% or ~1 in 882,384)",
+                "Rubble Creek Deposits": "(0.00009266% or ~1 in 1,079,199)",
+                "Rubble Creek Sands": "(0.00008779% or ~1 in 1,139,103)",
+                "Fortune River": "(0.00005739% or ~1 in 1,742,345)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Aetherite"
+        },
+        {
+            "name": "Aquamarine",
+            "rarity": "Legendary",
+            "locations": [
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Windswept Beach"
+            ]
+        },
+        {
+            "name": "Catseye",
+            "rarity": "Legendary",
+            "locations": [
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Volcanic Sands",
+                "Windswept Beach",
+                "The Magma Furnace"
+            ],
+            "value": "$2,222,222",
+            "description": "A golden catseye. Commonly believed to hold a deadly curse within.",
+            "dropChances": {
+                "Windswept Beach": "(0.00030135% or ~1 in 331,841)",
+                "The Magma Furnace": "(0.00028455% or ~1 in 351,434)",
+                "Volcanic Sands": "(0.00027884% or ~1 in 358,623)",
+                "Rubble Creek Deposits": "(0.00012355% or ~1 in 809,399)",
+                "Fortune River": "(0.00011479% or ~1 in 871,172)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Catseye"
+        },
+        {
+            "name": "Cinnabar",
+            "rarity": "Legendary",
+            "locations": [
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$900,000",
+            "description": "A vermillion chunk of cinnabar. Commonly used for extracting mercury.",
+            "dropChances": {
+                "The Magma Furnace": "(0.00011382% or ~1 in 878,584)",
+                "Volcanic Sands": "(0.00011154% or ~1 in 896,559)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Cinnabar"
+        },
+        {
+            "name": "Diamond",
+            "rarity": "Legendary",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Sunset Beach",
+                "Fortune River Delta"
+            ],
+            "value": "$1,000,000",
+            "description": "A rare diamond gem. Incredibly hard and reflective",
+            "dropChances": {
+                "Sunset Beach": "(0.00056665% or ~1 in 176,477)",
+                "Fortune River Delta": "(0.00054716% or ~1 in 182,762)Rubble Creek Deposits",
+                "Rubble Creek Deposits": "(0.00024710% or ~1 in 404,699)",
+                "Fortune River": "(0.00022958% or ~1 in 435,586)",
+                "Rubble Creek Sands": "(0.00013168% or ~1 in 759,402)",
+                "Frostbite River": "(?% or ~1 in ?)",
+                "Frostbite Waterfall": "(?% or ~1 in ?)",
+                "Frozen Peak": "(?% or ~1 in ?)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Diamond"
+        },
+        {
+            "name": "Dragon Bone",
+            "rarity": "Legendary",
+            "locations": [
+                "Windswept Beach",
+                "Infernal Heart"
+            ],
+            "value": "$2,000,000",
+            "description": "The bone of an ancient dragon.",
+            "dropChances": {
+                "Infernal Heart": "(0.00147364% or ~1 in 67,859)",
+                "Windswept Beach": "(0.00090405% or ~1 in 110,614)",
+                "The Magma Furnace": "(0.00085365% or ~1 in 117,145)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Dragon_Bone"
+        },
+        {
+            "name": "Fire Opal",
+            "rarity": "Legendary",
+            "locations": [
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$1,600,000",
+            "description": "A type of opal with a brilliant orange shine.",
+            "dropChances": {
+                "Infernal Heart": "(0.00029473% or ~1 in 339,295)",
+                "The Magma Furnace": "(0.00014227% or ~1 in 702,867)",
+                "Volcanic Sands": "(0.00013942% or ~1 in 717,247)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Fire_Opal"
+        },
+        {
+            "name": "Luminum",
+            "rarity": "Legendary",
+            "locations": [
+                "Sunset Beach",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$1,500,000",
+            "description": "A strange metal that constantly emits a bright yellow light.",
+            "dropChances": {
+                "Sunset Beach": "(0.00084997% or ~1 in 117,651)",
+                "Azuralite Oasis": "(0.00055468% or ~1 in 180,284)",
+                "Crystal Caverns": "(0.00042312% or ~1 in 236,341)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Luminum"
+        },
+        {
+            "name": "Palladium",
+            "rarity": "Legendary",
+            "locations": [
+                "Fortune River",
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$500,000",
+            "description": "A lustrous piece of palladium known for its unique properties.",
+            "dropChances": {
+                "Azuralite Oasis": "(0.00009245% or ~1 in 1,081,704)",
+                "Crystal Cavern River": "(0.00008462% or ~1 in 1,181,703)",
+                "Fortune River Delta": "(0.00008207% or ~1 in 1,218,414)",
+                "Fortune River": "(0.00002296% or ~1 in 4,355,862)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Palladium"
+        },
+        {
+            "name": "Rose Gold",
+            "rarity": "Legendary",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Volcanic Sands",
+                "Windswept Beach",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$500,000",
+            "description": "An extremely rare form of a gold with a distinct rose color.",
+            "dropChances": {
+                "Windswept Beach": "(0.00150675% or ~1 in 66,378)",
+                "The Magma Furnace": "(0.00142274% or ~1 in 70,287)",
+                "Volcanic Sands": "(0.00139422% or ~1 in 71,725)",
+                "Rubble Creek Deposits": "(0.00061774% or ~1 in 161,880)",
+                "Fortune River": "(0.00057394% or ~1 in 174,234)",
+                "Rubble Creek Sands": "(0.00043894% or ~1 in 227,821)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Rose_Gold"
+        },
+        {
+            "name": "Starshine",
+            "rarity": "Legendary",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ],
+            "value": "$2,500,000",
+            "description": "An astral fragment rarely found in the core of large meteors.",
+            "dropChances": {
+                "Azuralite Oasis": "(0.00009245% or ~1 in 1,081,704)",
+                "Crystal Cavern River": "(0.00008462% or ~1 in 1,181,703)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Starshine"
+        },
+        {
+            "name": "Tourmaline",
+            "rarity": "Legendary",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ]
+        },
+        {
+            "name": "Uranium",
+            "rarity": "Legendary",
+            "locations": [
+                "Fortune River",
+                "Fortune River Delta",
+                "Azuralite Oasis",
+                "Infernal Heart"
+            ],
+            "value": "$1,500,000",
+            "description": "A radioactive chunk of uranium.",
+            "dropChances": {
+                "Infernal Heart": "(0.00044209% or ~1 in 226,197)",
+                "Fortune River Delta": "(0.00027358% or ~1 in 365,524)",
+                "Azuralite Oasis": "(0.00023112% or ~1 in 432,682)",
+                "Fortune River": "(0.00017218% or ~1 in 580,782)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Uranium"
+        },
+        {
+            "name": "Volcanic Key",
+            "rarity": "Legendary",
+            "locations": [
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$1,500,000",
+            "description": "A mysterious key. Could sell for a lot, but maybe it has some other use?",
+            "dropChances": {
+                "Infernal Heart": "(0.00147364% or 1 in 67,859)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Volcanic_Key"
+        },
+        {
+            "name": "Flarebloom",
+            "rarity": "Mythical",
+            "locations": [
+                "Volcanic Sands",
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$30,000,000",
+            "description": "A mythical flower that only grows in the extreme heat of the center of a volcano.",
+            "dropChances": {
+                "Infernal Heart": "(0.00001105% or ~1 in 9,047,864)",
+                "The Magma Furnace": "(0.00000854% or ~1 in 11,714,451)",
+                "Volcanic Sands": "(0.00000279% or ~1 in 35,862,342)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Flarebloom"
+        },
+        {
+            "name": "Frosthard",
+            "rarity": "Mythical",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ]
+        },
+        {
+            "name": "Inferlume",
+            "rarity": "Mythical",
+            "locations": [
+                "Sunset Beach",
+                "Crystal Cavern River",
+                "Azuralite Oasis",
+                "Volcanic Sands",
+                "Windswept Beach",
+                "Infernal Heart"
+            ],
+            "value": "$14,000,000",
+            "description": "A luminescent crystal with flame-like properties.",
+            "dropChances": {
+                "Infernal Heart": "(0.00001105% or ~1 in 9,047,864)",
+                "Windswept Beach": "(0.00000904% or ~1 in 11,061,369)",
+                "Sunset Beach": "(0.00000850% or ~1 in 11,765,117)",
+                "Volcanic Sands": "(0.00000781% or ~1 in 12,807,979)",
+                "Azuralite Oasis": "(0.00000740% or ~1 in 13,521,298)",
+                "Crystal Cavern River": "(0.00000677% or ~1 in 14,771,283)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Inferlume"
+        },
+        {
+            "name": "Mythril",
+            "rarity": "Mythical",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ]
+        },
+        {
+            "name": "Painite",
+            "rarity": "Mythical",
+            "locations": [
+                "Fortune River",
+                "Sunset Beach",
+                "Fortune River Delta",
+                "Infernal Heart"
+            ],
+            "value": "$10,000,000",
+            "description": "An extremely rare gemstone with a vibrant red color.",
+            "dropChances": {
+                "Sunset Beach": "(0.00002267% or ~1 in 4,411,419)",
+                "Infernal Heart": "(0.00002210% or ~1 in 4,523,932)",
+                "Fortune River Delta": "(0.00002189% or ~1 in 4,569,051)",
+                "Fortune River": "(0.00001722% or ~1 in 5,807,816)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Painite"
+        },
+        {
+            "name": "Pink Diamond",
+            "rarity": "Mythical",
+            "locations": [
+                "Rubble Creek Sands",
+                "Rubble Creek Deposits",
+                "Fortune River",
+                "Fortune River Delta",
+                "Volcanic Sands"
+            ],
+            "value": "$6,000,000",
+            "description": "A variant of diamond with a unique pink tint.",
+            "dropChances": {
+                "Fortune River Delta": "(0.00004377% or ~1 in 2,284,525)",
+                "Fortune River": "(0.00002870% or ~1 in 3,484,689)",
+                "Rubble Creek Deposits": "(0.00002471% or ~1 in 4,046,995)",
+                "Volcanic Sands": "(0.00002231% or ~1 in 4,482,793)",
+                "Rubble Creek Sands": "(0.00001756% or ~1 in 5,695,514)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Pink_Diamond"
+        },
+        {
+            "name": "Prismara",
+            "rarity": "Mythical",
+            "locations": [
+                "Azuralite Oasis"
+            ],
+            "value": "$25,000,000",
+            "description": "Formed by the world itself.",
+            "dropChances": {
+                "Azuralite Oasis": "(0.00000277% or ~1 in 36,056,795)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Prismara"
+        },
+        {
+            "name": "Volcanic Core",
+            "rarity": "Mythical",
+            "locations": [
+                "The Magma Furnace",
+                "Infernal Heart"
+            ],
+            "value": "$40,000,000",
+            "description": "The unstable core of a volcano. Contains the potential to cause immense destruction.",
+            "dropChances": {
+                "Infernal Heart": "(0.00000368% or ~1 in 27,143,593)",
+                "The Magma Furnace": "(0.00000285% or ~1 in 35,143,354)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Volcanic_Core"
+        },
+        {
+            "name": "Vortessence",
+            "rarity": "Mythical",
+            "locations": [
+                "Fortune River Delta",
+                "Crystal Cavern River",
+                "Azuralite Oasis",
+                "Windswept Beach"
+            ],
+            "value": "$20,000,000",
+            "description": "A celestial stone with distinct rings. Believed to be formed by the collapse of a star.",
+            "dropChances": {
+                "Windswept Beach": "(0.00000904% or ~1 in 11,061,369)",
+                "Fortune River Delta": "(0.00000821% or ~1 in 12,184,135)",
+                "Azuralite Oasis": "(0.00000740% or ~1 in 13,521,298)",
+                "Crystal Cavern River": "(0.00000677% or ~1 in 14,771,283)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Vortessence"
+        },
+        {
+            "name": "Cryonic Artifact",
+            "rarity": "Exotic",
+            "locations": [
+                "Crystal Cavern River",
+                "Azuralite Oasis"
+            ]
+        },
+        {
+            "name": "Dinosaur Skull",
+            "rarity": "Exotic",
+            "locations": [
+                "Windswept Beach",
+                "Infernal Heart"
+            ],
+            "value": "$50,000,000",
+            "description": "A skull of a dinosaur. What's this doing here!",
+            "dropChances": {
+                "Infernal Heart": "(0.00000184% or ~1 in 54,287,187)"
+            },
+            "url": "https://prospecting.fandom.com/wiki/Dinosaur_Skull"
+        }
+    ]
+}

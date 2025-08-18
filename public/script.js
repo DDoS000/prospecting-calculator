@@ -11,18 +11,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     displayEquipment();
 });
 
-// Load all data from API
+// Load all data from static files
 async function loadAllData() {
     try {
-        const [equipmentRes, oresRes, zonesRes] = await Promise.all([
-            fetch('/api/equipment'),
-            fetch('/api/ores'),
-            fetch('/api/zones')
-        ]);
+        const dataRes = await fetch('./data.json');
+        const allData = await dataRes.json();
 
-        equipmentData = await equipmentRes.json();
-        oresData = await oresRes.json();
-        zonesData = await zonesRes.json();
+        equipmentData = allData;
+        oresData = allData.minerals || [];
+        zonesData = { locations: allData.locations || [] };
         
         // Debug logs
         console.log('Loaded equipmentData:', equipmentData);
