@@ -79,7 +79,7 @@ def merge_mineral_data(all_data, minerals_data):
             updated_minerals.append(new_mineral)
     
     # Sort minerals by rarity and then by name
-    rarity_order = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythical', 'Mythic', 'Exotic']
+    rarity_order = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythical', 'Exotic']
     
     def sort_key(mineral):
         rarity = mineral.get('rarity', 'Unknown')

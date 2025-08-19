@@ -157,7 +157,7 @@ input[type="text"]:focus, select:focus {
 .rarity-rare { background: #63b3ed; color: white; }
 .rarity-epic { background: #9f7aea; color: white; }
 .rarity-legendary { background: #f6ad55; color: white; }
-.rarity-mythic { background: #fc8181; color: white; }
+.rarity-mythical { background: #fc8181; color: white; }
 .rarity-exotic { background: #ed64a6; color: white; }
 
 .locations-list {
