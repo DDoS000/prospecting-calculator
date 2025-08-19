@@ -1204,41 +1204,45 @@ function getStatValue(equipmentName, statName, level) {
 }
 
 function updateTotalStats() {
+    // Initialize all possible stats
     const totalStats = {
         luck: 0,
-        speed: 0,
-        power: 0
+        digSpeed: 0,
+        digStrength: 0,
+        capacity: 0,
+        shakeSpeed: 0,
+        shakeStrength: 0,
+        sellBoost: 0,
+        sizeBoost: 0,
+        modifierBoost: 0
+    };
+
+    // Helper function to add stats from equipment
+    const addEquipmentStats = (equipmentName, level) => {
+        const equipStats = equipmentStats[equipmentName];
+        if (equipStats) {
+            Object.keys(equipStats).forEach(stat => {
+                if (totalStats.hasOwnProperty(stat)) {
+                    totalStats[stat] += getStatValue(equipmentName, stat, level);
+                }
+            });
+        }
     };
 
     // Calculate neck stats
     if (simulatorEquipment.neck && simulatorEquipment.neck.item) {
-        const neckStats = equipmentStats[simulatorEquipment.neck.item];
-        if (neckStats) {
-            Object.keys(neckStats).forEach(stat => {
-                totalStats[stat] += getStatValue(simulatorEquipment.neck.item, stat, simulatorEquipment.neck.level);
-            });
-        }
+        addEquipmentStats(simulatorEquipment.neck.item, simulatorEquipment.neck.level);
     }
 
     // Calculate charm stats
     if (simulatorEquipment.charm && simulatorEquipment.charm.item) {
-        const charmStats = equipmentStats[simulatorEquipment.charm.item];
-        if (charmStats) {
-            Object.keys(charmStats).forEach(stat => {
-                totalStats[stat] += getStatValue(simulatorEquipment.charm.item, stat, simulatorEquipment.charm.level);
-            });
-        }
+        addEquipmentStats(simulatorEquipment.charm.item, simulatorEquipment.charm.level);
     }
 
     // Calculate rings stats
     simulatorEquipment.rings.forEach(ring => {
         if (ring.item) {
-            const ringStats = equipmentStats[ring.item];
-            if (ringStats) {
-                Object.keys(ringStats).forEach(stat => {
-                    totalStats[stat] += getStatValue(ring.item, stat, ring.level);
-                });
-            }
+            addEquipmentStats(ring.item, ring.level);
         }
     });
 
@@ -1250,20 +1254,46 @@ function updateTotalStats() {
 function displayTotalStats(stats) {
     const container = document.getElementById('total-stats');
 
-    container.innerHTML = `
-        <div class="stat-item">
-            <span class="stat-name">🍀 Luck</span>
-            <span class="stat-value ${stats.luck > 0 ? 'stat-boost' : 'stat-neutral'}">${stats.luck}</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-name">⚡ Speed</span>
-            <span class="stat-value ${stats.speed > 0 ? 'stat-boost' : 'stat-neutral'}">${stats.speed}</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-name">💪 Power</span>
-            <span class="stat-value ${stats.power > 0 ? 'stat-boost' : 'stat-neutral'}">${stats.power}</span>
-        </div>
-    `;
+    // Define stat display information
+    const statInfo = {
+        luck: { name: '🍀 Luck', suffix: '' },
+        digSpeed: { name: '⚡ Dig Speed', suffix: '%' },
+        digStrength: { name: '💪 Dig Strength', suffix: '' },
+        capacity: { name: '🎒 Capacity', suffix: '' },
+        shakeSpeed: { name: '🌪️ Shake Speed', suffix: '%' },
+        shakeStrength: { name: '💥 Shake Strength', suffix: '' },
+        sellBoost: { name: '💰 Sell Boost', suffix: '%' },
+        sizeBoost: { name: '📏 Size Boost', suffix: '%' },
+        modifierBoost: { name: '✨ Modifier Boost', suffix: '%' }
+    };
+
+    let html = '';
+    
+    Object.keys(statInfo).forEach(statKey => {
+        const value = stats[statKey] || 0;
+        if (value !== 0) { // Only show stats that have values
+            const info = statInfo[statKey];
+            const isPositive = value > 0;
+            const isNegative = value < 0;
+            const cssClass = isPositive ? 'stat-boost' : isNegative ? 'stat-debuff' : 'stat-neutral';
+            
+            html += `
+                <div class="stat-item">
+                    <span class="stat-name">${info.name}</span>
+                    <span class="stat-value ${cssClass}">
+                        ${isPositive ? '+' : ''}${value}${info.suffix}
+                    </span>
+                </div>
+            `;
+        }
+    });
+
+    // If no stats, show a message
+    if (html === '') {
+        html = '<div class="no-stats">ไม่มี Equipment ที่ใส่</div>';
+    }
+
+    container.innerHTML = html;
 }
 
 function updateRecommendations(currentStats = { luck: 0, speed: 0, power: 0 }) {
@@ -1278,19 +1308,36 @@ function updateRecommendations(currentStats = { luck: 0, speed: 0, power: 0 }) {
     }
 
     // Group recommendations by stat type
-    const groupedRecommendations = {
-        luck: recommendations.filter(r => r.targetStat === 'luck'),
-        speed: recommendations.filter(r => r.targetStat === 'speed'),
-        power: recommendations.filter(r => r.targetStat === 'power')
-    };
+    const groupedRecommendations = {};
+    
+    // Group all recommendations by their target stat
+    recommendations.forEach(rec => {
+        if (!groupedRecommendations[rec.targetStat]) {
+            groupedRecommendations[rec.targetStat] = [];
+        }
+        groupedRecommendations[rec.targetStat].push(rec);
+    });
 
     let html = '';
 
     Object.keys(groupedRecommendations).forEach(statType => {
         const recs = groupedRecommendations[statType];
         if (recs.length > 0) {
-            const statEmoji = statType === 'luck' ? '🍀' : statType === 'speed' ? '⚡' : '💪';
-            const statName = statType === 'luck' ? 'Luck' : statType === 'speed' ? 'Speed' : 'Power';
+            // Get emoji and display name for each stat
+            const statEmojis = {
+                luck: '🍀',
+                digSpeed: '⚡',
+                digStrength: '💪',
+                capacity: '🎒',
+                shakeSpeed: '🌪️',
+                shakeStrength: '💥',
+                sellBoost: '💰',
+                sizeBoost: '📏',
+                modifierBoost: '✨'
+            };
+            
+            const statEmoji = statEmojis[statType] || '📊';
+            const statName = getStatDisplayName(statType);
 
             html += `
                 <div class="recommendation-section">
@@ -1473,7 +1520,7 @@ function processEquipmentStats() {
     console.log('Processed equipment stats:', equipmentStats);
 }
 
-// Parse buffs string to extract stats with min/mid/max values
+// Parse buffs string to extract all stats with min/mid/max values
 function parseBuffsToStats(buffsString) {
     const stats = {};
 
@@ -1485,97 +1532,41 @@ function parseBuffsToStats(buffsString) {
     buffs.forEach(buff => {
         const trimmed = buff.trim();
 
-        // Match patterns like "Luck: 1-4", "Dig Speed: 10-40%", etc.
-        const luckMatch = trimmed.match(/Luck:\s*([0-9.]+)(?:-([0-9.]+))?/i);
-        const speedMatch = trimmed.match(/(?:Dig\s*Speed|Speed):\s*([0-9.]+)(?:-([0-9.]+))?%?/i);
-        const strengthMatch = trimmed.match(/(?:Dig\s*Strength|Strength):\s*([0-9.]+)(?:-([0-9.]+))?/i);
-        const capacityMatch = trimmed.match(/Capacity:\s*([0-9.]+)(?:-([0-9.]+))?/i);
-        const shakeSpeedMatch = trimmed.match(/Shake\s*Speed:\s*([0-9.]+)(?:-([0-9.]+))?%?/i);
-        const shakeStrengthMatch = trimmed.match(/Shake\s*Strength:\s*([0-9.]+)(?:-([0-9.]+))?/i);
-
-        // Process Luck
-        if (luckMatch) {
-            const min = parseFloat(luckMatch[1]);
-            const max = luckMatch[2] ? parseFloat(luckMatch[2]) : min;
+        // Helper function to parse stat values (handles negative values too)
+        const parseStatRange = (match) => {
+            if (!match) return null;
+            const min = parseFloat(match[1]);
+            const max = match[2] ? parseFloat(match[2]) : min;
             const mid = (min + max) / 2;
-            stats.luck = [min, mid, max];
-        }
+            return [min, mid, max];
+        };
 
-        // Process Speed (combining Dig Speed and general Speed)
-        if (speedMatch) {
-            const min = parseFloat(speedMatch[1]);
-            const max = speedMatch[2] ? parseFloat(speedMatch[2]) : min;
-            const mid = (min + max) / 2;
-            // Convert percentage to points (divide by 10 for balance)
-            const speedMin = Math.max(1, Math.round(min / 10));
-            const speedMid = Math.max(1, Math.round(mid / 10));
-            const speedMax = Math.max(1, Math.round(max / 10));
-            stats.speed = [speedMin, speedMid, speedMax];
-        }
+        // Match all possible stats from the game
+        const patterns = {
+            luck: /Luck:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?/i,
+            digSpeed: /Dig\s*Speed:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?%?/i,
+            digStrength: /Dig\s*Strength:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?/i,
+            capacity: /Capacity:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?/i,
+            shakeSpeed: /Shake\s*Speed:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?%?/i,
+            shakeStrength: /Shake\s*Strength:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?/i,
+            sellBoost: /Sell\s*Boost:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?%?/i,
+            sizeBoost: /Size\s*Boost:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?%?/i,
+            modifierBoost: /Modifier\s*Boost:\s*(-?[0-9.]+)(?:-(-?[0-9.]+))?%?/i
+        };
 
-        // Process Strength (combining Dig Strength and general Strength)
-        if (strengthMatch) {
-            const min = parseFloat(strengthMatch[1]);
-            const max = strengthMatch[2] ? parseFloat(strengthMatch[2]) : min;
-            const mid = (min + max) / 2;
-            stats.power = [min, mid, max];
-        }
-
-        // Process Capacity as a form of power
-        if (capacityMatch) {
-            const min = parseFloat(capacityMatch[1]);
-            const max = capacityMatch[2] ? parseFloat(capacityMatch[2]) : min;
-            const mid = (min + max) / 2;
-            // Convert capacity to power points (divide by 20 for balance)
-            const powerMin = Math.max(1, Math.round(min / 20));
-            const powerMid = Math.max(1, Math.round(mid / 20));
-            const powerMax = Math.max(1, Math.round(max / 20));
-
-            if (stats.power) {
-                stats.power[0] += powerMin;
-                stats.power[1] += powerMid;
-                stats.power[2] += powerMax;
-            } else {
-                stats.power = [powerMin, powerMid, powerMax];
+        // Process each stat type
+        Object.keys(patterns).forEach(statType => {
+            const match = trimmed.match(patterns[statType]);
+            if (match) {
+                const values = parseStatRange(match);
+                if (values) {
+                    stats[statType] = values;
+                }
             }
-        }
-
-        // Process Shake Speed as additional speed
-        if (shakeSpeedMatch) {
-            const min = parseFloat(shakeSpeedMatch[1]);
-            const max = shakeSpeedMatch[2] ? parseFloat(shakeSpeedMatch[2]) : min;
-            const mid = (min + max) / 2;
-            // Convert percentage to points (divide by 15 for balance)
-            const speedMin = Math.max(1, Math.round(Math.abs(min) / 15));
-            const speedMid = Math.max(1, Math.round(Math.abs(mid) / 15));
-            const speedMax = Math.max(1, Math.round(Math.abs(max) / 15));
-
-            if (stats.speed) {
-                stats.speed[0] += speedMin;
-                stats.speed[1] += speedMid;
-                stats.speed[2] += speedMax;
-            } else {
-                stats.speed = [speedMin, speedMid, speedMax];
-            }
-        }
-
-        // Process Shake Strength as additional power
-        if (shakeStrengthMatch) {
-            const min = parseFloat(shakeStrengthMatch[1]);
-            const max = shakeStrengthMatch[2] ? parseFloat(shakeStrengthMatch[2]) : min;
-            const mid = (min + max) / 2;
-
-            if (stats.power) {
-                stats.power[0] += min;
-                stats.power[1] += mid;
-                stats.power[2] += max;
-            } else {
-                stats.power = [min, mid, max];
-            }
-        }
+        });
     });
 
-    // Round all values
+    // Round all values to 1 decimal place
     Object.keys(stats).forEach(stat => {
         stats[stat] = stats[stat].map(val => Math.round(val * 10) / 10);
     });
@@ -1630,8 +1621,14 @@ function findBestEquipmentForStat(statName, equipmentType, currentStats) {
 function getStatDisplayName(statName) {
     switch (statName) {
         case 'luck': return 'Luck';
-        case 'speed': return 'Speed';
-        case 'power': return 'Power';
+        case 'digSpeed': return 'Dig Speed';
+        case 'digStrength': return 'Dig Strength';
+        case 'capacity': return 'Capacity';
+        case 'shakeSpeed': return 'Shake Speed';
+        case 'shakeStrength': return 'Shake Strength';
+        case 'sellBoost': return 'Sell Boost';
+        case 'sizeBoost': return 'Size Boost';
+        case 'modifierBoost': return 'Modifier Boost';
         default: return statName;
     }
 }
@@ -1657,8 +1654,18 @@ function generateRecommendationsFromData(currentStats) {
     if (!equipmentData.crafting) return recommendations;
 
     // Recommendations for each stat
-    const stats = ['luck', 'speed', 'power'];
-    const statThresholds = { luck: 50, speed: 20, power: 30 };
+    const stats = ['luck', 'digSpeed', 'digStrength', 'capacity', 'shakeSpeed', 'shakeStrength', 'sellBoost', 'sizeBoost', 'modifierBoost'];
+    const statThresholds = { 
+        luck: 50, 
+        digSpeed: 30, 
+        digStrength: 20, 
+        capacity: 50, 
+        shakeSpeed: 20, 
+        shakeStrength: 10, 
+        sellBoost: 30, 
+        sizeBoost: 30, 
+        modifierBoost: 50 
+    };
 
     stats.forEach(statName => {
         if (currentStats[statName] < statThresholds[statName]) {

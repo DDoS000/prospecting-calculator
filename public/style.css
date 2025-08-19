@@ -1195,8 +1195,20 @@ input[type="text"]:focus, select:focus {
     font-weight: bold;
 }
 
+.stat-debuff {
+    color: #e53e3e;
+    font-weight: bold;
+}
+
 .stat-neutral {
     color: #4a5568;
+}
+
+.no-stats {
+    text-align: center;
+    color: #718096;
+    font-style: italic;
+    padding: 20px;
 }
 
 @media (max-width: 768px) {
