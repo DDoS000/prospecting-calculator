@@ -4,6 +4,16 @@ let oresData = [];
 let zonesData = [];
 let selectedEquipmentList = [];
 
+// Equipment Simulator data
+let simulatorEquipment = {
+    neck: null,
+    charm: null,
+    rings: []
+};
+
+// Equipment stats will be populated from data.json
+let equipmentStats = {};
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllData();
@@ -20,21 +30,24 @@ async function loadAllData() {
         equipmentData = allData;
         oresData = allData.minerals || [];
         zonesData = { locations: allData.locations || [] };
-        
+
+        // Process equipment data for simulator
+        processEquipmentStats();
+
         // Debug logs
         console.log('Loaded equipmentData:', equipmentData);
         console.log('equipmentData.minerals length:', equipmentData.minerals ? equipmentData.minerals.length : 'undefined');
         console.log('oresData length:', oresData ? oresData.length : 'undefined');
-        
+
         // Check Fire Opal specifically
         if (equipmentData.minerals) {
             const fireOpal = equipmentData.minerals.find(m => m.name === 'Fire Opal');
             console.log('Fire Opal in equipmentData.minerals:', fireOpal);
         }
-        
+
         const fireOpalInOres = oresData.find(m => m.name === 'Fire Opal');
         console.log('Fire Opal in oresData:', fireOpalInOres);
-        
+
     } catch (error) {
         console.error('Error loading data:', error);
     }
@@ -54,14 +67,19 @@ function setupEventListeners() {
     document.getElementById('equipment-search').addEventListener('input', filterEquipment);
     document.getElementById('ore-search').addEventListener('input', filterOres);
     document.getElementById('rarity-filter').addEventListener('change', filterOres);
-    
+
     // Calculator functionality
     document.getElementById('calculate-btn').addEventListener('click', calculateMaterials);
     document.getElementById('add-equipment-btn').addEventListener('click', addEquipment);
     document.getElementById('clear-all-btn').addEventListener('click', clearAllEquipment);
-    
+
+    // Equipment Simulator functionality
+    document.getElementById('add-ring-btn').addEventListener('click', addRingSlot);
+    setupSimulatorEventListeners();
+
     // Populate equipment selector
     populateEquipmentSelector();
+    populateSimulatorSelectors();
 }
 
 // Tab switching
@@ -79,7 +97,7 @@ function switchTab(tabName) {
     document.getElementById(tabName).classList.add('active');
 
     // Load appropriate data
-    switch(tabName) {
+    switch (tabName) {
         case 'equipment':
             displayEquipment();
             break;
@@ -92,6 +110,12 @@ function switchTab(tabName) {
         case 'calculator':
             // Calculator tab doesn't need special loading
             break;
+        case 'simulator':
+            // Initialize simulator if not already done
+            if (document.getElementById('rings-container').children.length === 0) {
+                initializeSimulator();
+            }
+            break;
     }
 }
 
@@ -99,7 +123,7 @@ function switchTab(tabName) {
 function getMaterialsLocations(materialsString) {
     const materials = parseMaterials(materialsString);
     const allLocations = new Set();
-    
+
     materials.forEach(material => {
         const oreInfo = findOreInfo(material.name);
         if (oreInfo && oreInfo.locations) {
@@ -108,7 +132,7 @@ function getMaterialsLocations(materialsString) {
             });
         }
     });
-    
+
     return Array.from(allLocations);
 }
 
@@ -116,10 +140,10 @@ function getMaterialsLocations(materialsString) {
 function displayEquipment(filteredData = null) {
     const container = document.getElementById('equipment-list');
     const data = filteredData || equipmentData.crafting || [];
-    
+
     container.innerHTML = data.map(item => {
         const materialsLocations = getMaterialsLocations(item.materials);
-        
+
         return `
             <div class="card">
                 <h3>${item.item}</h3>
@@ -138,12 +162,12 @@ function displayEquipment(filteredData = null) {
                     <strong>ตำแหน่งที่แนะนำ:</strong>
                 </div>
                 <div class="locations-list">
-                    ${materialsLocations.length > 0 ? 
-                        materialsLocations.map(location => 
-                            `<span class="location-tag">${location}</span>`
-                        ).join('') : 
-                        '<span class="location-tag">ไม่พบข้อมูล</span>'
-                    }
+                    ${materialsLocations.length > 0 ?
+                materialsLocations.map(location =>
+                    `<span class="location-tag">${location}</span>`
+                ).join('') :
+                '<span class="location-tag">ไม่พบข้อมูล</span>'
+            }
                 </div>
             </div>
         `;
@@ -154,7 +178,7 @@ function displayEquipment(filteredData = null) {
 function displayOres(filteredData = null) {
     const container = document.getElementById('ores-list');
     const data = filteredData || oresData || [];
-    
+
     container.innerHTML = data.map(ore => `
         <div class="card">
             <div class="ore-header">
@@ -174,21 +198,21 @@ function displayOres(filteredData = null) {
                 <strong>ตำแหน่ง:</strong>
             </div>
             <div class="locations-list">
-                ${ore.locations.map(location => 
-                    `<span class="location-tag">${location}</span>`
-                ).join('')}
+                ${ore.locations.map(location =>
+        `<span class="location-tag">${location}</span>`
+    ).join('')}
             </div>
             ${ore.dropChances ? `
                 <div class="card-info">
                     <strong>อัตราการหา:</strong>
                 </div>
                 <div class="drop-chances">
-                    ${Object.entries(ore.dropChances).map(([location, chance]) => 
-                        `<div class="drop-chance-item">
+                    ${Object.entries(ore.dropChances).map(([location, chance]) =>
+        `<div class="drop-chance-item">
                             <span class="drop-location">${location}:</span>
                             <span class="drop-rate">${chance}</span>
                         </div>`
-                    ).join('')}
+    ).join('')}
                 </div>
             ` : ''}
         </div>
@@ -199,7 +223,7 @@ function displayOres(filteredData = null) {
 function displayZones() {
     const container = document.getElementById('zones-list');
     const data = zonesData.locations || [];
-    
+
     container.innerHTML = data.map(zone => `
         <div class="card">
             <h3>${zone.name}</h3>
@@ -220,7 +244,7 @@ function displayZones() {
 // Filter equipment
 function filterEquipment() {
     const searchTerm = document.getElementById('equipment-search').value.toLowerCase();
-    const filtered = equipmentData.crafting.filter(item => 
+    const filtered = equipmentData.crafting.filter(item =>
         item.item.toLowerCase().includes(searchTerm) ||
         item.type.toLowerCase().includes(searchTerm) ||
         item.materials.toLowerCase().includes(searchTerm) ||
@@ -233,32 +257,32 @@ function filterEquipment() {
 function filterOres() {
     const searchTerm = document.getElementById('ore-search').value.toLowerCase();
     const rarityFilter = document.getElementById('rarity-filter').value;
-    
+
     let filtered = oresData.filter(ore => {
         const matchesSearch = ore.name.toLowerCase().includes(searchTerm) ||
-                            ore.locations.some(loc => loc.toLowerCase().includes(searchTerm));
+            ore.locations.some(loc => loc.toLowerCase().includes(searchTerm));
         const matchesRarity = !rarityFilter || ore.rarity === rarityFilter;
-        
+
         return matchesSearch && matchesRarity;
     });
-    
+
     displayOres(filtered);
 }
 // Populate equipment selector dropdown
 function populateEquipmentSelector() {
     const selector = document.getElementById('equipment-select');
     const equipment = equipmentData.crafting || [];
-    
+
     // Clear existing options except the first one
     selector.innerHTML = '<option value="">-- เลือก Equipment --</option>';
-    
+
     // Sort equipment by cost (price) from low to high
     const sortedEquipment = [...equipment].sort((a, b) => {
         const costA = parseInt(a.cost.replace(/,/g, ''));
         const costB = parseInt(b.cost.replace(/,/g, ''));
         return costA - costB;
     });
-    
+
     sortedEquipment.forEach((item, index) => {
         const option = document.createElement('option');
         // Use original index to maintain compatibility
@@ -274,16 +298,16 @@ function populateEquipmentSelector() {
 function parseMaterials(materialsString) {
     const materials = [];
     const parts = materialsString.split(',');
-    
+
     parts.forEach(part => {
         const trimmed = part.trim();
         const match = trimmed.match(/(\d+)\s+(.+?)(?:\s*\(([^)]+)\))?$/);
-        
+
         if (match) {
             const quantity = parseInt(match[1]);
             const name = match[2].trim();
             const requirement = match[3] || null;
-            
+
             materials.push({
                 name: name,
                 quantity: quantity,
@@ -291,68 +315,68 @@ function parseMaterials(materialsString) {
             });
         }
     });
-    
+
     return materials;
 }
 
 // Find ore information by name
 function findOreInfo(oreName) {
     console.log(`Searching for: "${oreName}"`);
-    
+
     // First try to find in equipmentData.minerals (from all.json)
     if (equipmentData.minerals && equipmentData.minerals.length > 0) {
         console.log(`Searching in equipmentData.minerals (${equipmentData.minerals.length} items)`);
-        
+
         // Try exact match first
         let mineral = equipmentData.minerals.find(ore => {
             const match = ore.name.toLowerCase() === oreName.toLowerCase();
             if (match) console.log(`Exact match found: ${ore.name}`);
             return match;
         });
-        
+
         // If no exact match, try partial match
         if (!mineral) {
             console.log(`No exact match, trying partial match...`);
             mineral = equipmentData.minerals.find(ore => {
                 const match = ore.name.toLowerCase().includes(oreName.toLowerCase()) ||
-                             oreName.toLowerCase().includes(ore.name.toLowerCase());
+                    oreName.toLowerCase().includes(ore.name.toLowerCase());
                 if (match) console.log(`Partial match found: ${ore.name} for search "${oreName}"`);
                 return match;
             });
         }
-        
+
         if (mineral) {
             console.log(`Found ${oreName} in equipmentData.minerals:`, mineral);
             return mineral;
         }
     }
-    
+
     console.log(`Not found in equipmentData.minerals, trying oresData...`);
-    
+
     // Fallback to oresData
-    let fallback = oresData.find(ore => 
+    let fallback = oresData.find(ore =>
         ore.name.toLowerCase() === oreName.toLowerCase()
     );
-    
+
     if (!fallback) {
-        fallback = oresData.find(ore => 
+        fallback = oresData.find(ore =>
             ore.name.toLowerCase().includes(oreName.toLowerCase()) ||
             oreName.toLowerCase().includes(ore.name.toLowerCase())
         );
     }
-    
+
     if (fallback) {
         console.log(`Found ${oreName} in oresData (fallback):`, fallback);
     } else {
         console.log(`Could not find ${oreName} in any data source`);
     }
-    
+
     return fallback;
 }
 
 // Get zone information by name
 function getZoneInfo(zoneName) {
-    return zonesData.locations.find(zone => 
+    return zonesData.locations.find(zone =>
         zone.name.toLowerCase() === zoneName.toLowerCase() ||
         zone.name.toLowerCase().includes(zoneName.toLowerCase())
     );
@@ -362,27 +386,27 @@ function getZoneInfo(zoneName) {
 function addEquipment() {
     const selectedEquipmentId = document.getElementById('equipment-select').value;
     const quantity = parseInt(document.getElementById('quantity').value) || 1;
-    
+
     if (!selectedEquipmentId) {
         alert('กรุณาเลือก Equipment ก่อน');
         return;
     }
-    
+
     // Find equipment by ID or index
-    const equipment = equipmentData.crafting.find((item, index) => 
+    const equipment = equipmentData.crafting.find((item, index) =>
         (item.id && item.id === selectedEquipmentId) || index.toString() === selectedEquipmentId
     );
-    
+
     if (!equipment) {
         alert('ไม่พบข้อมูล Equipment');
         return;
     }
-    
+
     // Check if equipment already exists in list
-    const existingIndex = selectedEquipmentList.findIndex(item => 
+    const existingIndex = selectedEquipmentList.findIndex(item =>
         item.equipment.item === equipment.item
     );
-    
+
     if (existingIndex >= 0) {
         // Update quantity if exists
         selectedEquipmentList[existingIndex].quantity += quantity;
@@ -393,11 +417,11 @@ function addEquipment() {
             quantity: quantity
         });
     }
-    
+
     // Reset form
     document.getElementById('equipment-select').value = '';
     document.getElementById('quantity').value = 1;
-    
+
     // Update display
     displaySelectedEquipment();
 }
@@ -418,12 +442,12 @@ function clearAllEquipment() {
 // Display selected equipment list
 function displaySelectedEquipment() {
     const container = document.getElementById('equipment-items');
-    
+
     if (selectedEquipmentList.length === 0) {
         container.innerHTML = '<p style="color: #718096; font-style: italic;">ยังไม่ได้เลือก Equipment</p>';
         return;
     }
-    
+
     container.innerHTML = selectedEquipmentList.map((item, index) => `
         <div class="equipment-item">
             <div class="equipment-item-info">
@@ -451,17 +475,17 @@ function calculateMaterials() {
         alert('กรุณาเพิ่ม Equipment ก่อน');
         return;
     }
-    
+
     // Combine all materials from selected equipment
     const allMaterials = {};
     let totalCraftingCost = 0;
     let totalMaterialValue = 0;
-    
+
     selectedEquipmentList.forEach(item => {
         const materials = parseMaterials(item.equipment.materials);
         const costPerItem = parseInt(item.equipment.cost.replace(/,/g, ''));
         totalCraftingCost += costPerItem * item.quantity;
-        
+
         materials.forEach(material => {
             const key = `${material.name}${material.requirement ? `_${material.requirement}` : ''}`;
             if (!allMaterials[key]) {
@@ -474,7 +498,7 @@ function calculateMaterials() {
                 };
             }
             allMaterials[key].totalQuantity += material.quantity * item.quantity;
-            
+
             // Get mineral value
             const oreInfo = findOreInfo(material.name);
             if (oreInfo && oreInfo.value) {
@@ -484,15 +508,15 @@ function calculateMaterials() {
             }
         });
     });
-    
+
     const combinedMaterials = Object.values(allMaterials);
-    
+
     // Display results with enhanced cost analysis
     displayCalculationResults(null, combinedMaterials, totalCraftingCost, null, totalMaterialValue);
-    
+
     // Generate farming route with player capability
     generateFarmingRoute(combinedMaterials);
-    
+
     // Generate farming efficiency analysis
     generateFarmingEfficiency(combinedMaterials);
 }
@@ -502,7 +526,7 @@ function displayCalculationResults(equipment, materials, totalCraftingCost, quan
     const resultContainer = document.getElementById('calculation-result');
     const materialsContainer = document.getElementById('materials-list');
     const costContainer = document.getElementById('total-cost');
-    
+
     // Show materials list with values
     materialsContainer.innerHTML = materials.map(material => {
         const oreInfo = findOreInfo(material.name);
@@ -510,7 +534,7 @@ function displayCalculationResults(equipment, materials, totalCraftingCost, quan
         const rarity = oreInfo ? oreInfo.rarity : 'Unknown';
         const unitValue = material.unitValue || 0;
         const totalValue = material.totalValue || 0;
-        
+
         return `
             <div class="material-item">
                 <div class="material-info">
@@ -536,7 +560,7 @@ function displayCalculationResults(equipment, materials, totalCraftingCost, quan
             </div>
         `;
     }).join('');
-    
+
     // Show enhanced cost analysis
     if (equipment && quantity) {
         // Single equipment
@@ -562,10 +586,10 @@ function displayCalculationResults(equipment, materials, totalCraftingCost, quan
         `;
     } else {
         // Multiple equipment
-        const equipmentSummary = selectedEquipmentList.map(item => 
+        const equipmentSummary = selectedEquipmentList.map(item =>
             `${item.equipment.item} x${item.quantity}`
         ).join(', ');
-        
+
         costContainer.innerHTML = `
             <div class="cost-analysis">
                 <div class="equipment-summary">${equipmentSummary}</div>
@@ -581,25 +605,25 @@ function displayCalculationResults(equipment, materials, totalCraftingCost, quan
                     <div class="cost-item profit-analysis">
                         <span class="cost-label">การวิเคราะห์:</span>
                         <span class="cost-value ${totalMaterialValue > totalCraftingCost ? 'profit' : 'loss'}">
-                            ${totalMaterialValue > totalCraftingCost ? 
-                                `กำไร $${(totalMaterialValue - totalCraftingCost).toLocaleString()}` : 
-                                `ขาดทุน $${(totalCraftingCost - totalMaterialValue).toLocaleString()}`
-                            }
+                            ${totalMaterialValue > totalCraftingCost ?
+                    `กำไร $${(totalMaterialValue - totalCraftingCost).toLocaleString()}` :
+                    `ขาดทุน $${(totalCraftingCost - totalMaterialValue).toLocaleString()}`
+                }
                         </span>
                     </div>
                     <div class="cost-efficiency">
                         <small>
-                            ${totalMaterialValue > totalCraftingCost ? 
-                                '✅ คุ้มค่า: ขาย Materials ได้กำไรมากกว่า Craft' : 
-                                '⚠️ ไม่คุ้มค่า: Craft แล้วขายดีกว่าขาย Materials'
-                            }
+                            ${totalMaterialValue > totalCraftingCost ?
+                    '✅ คุ้มค่า: ขาย Materials ได้กำไรมากกว่า Craft' :
+                    '⚠️ ไม่คุ้มค่า: Craft แล้วขายดีกว่าขาย Materials'
+                }
                         </small>
                     </div>
                 ` : ''}
             </div>
         `;
     }
-    
+
     resultContainer.style.display = 'block';
 }
 
@@ -607,7 +631,7 @@ function displayCalculationResults(equipment, materials, totalCraftingCost, quan
 function getBestDropLocation(dropChances) {
     let bestLocation = '';
     let bestRate = 0;
-    
+
     Object.entries(dropChances).forEach(([location, chance]) => {
         // Extract percentage from string like "(4.62233721% or ~1 in 22)"
         const match = chance.match(/\(([0-9.]+)%/);
@@ -619,7 +643,7 @@ function getBestDropLocation(dropChances) {
             }
         }
     });
-    
+
     return bestLocation ? `${bestLocation} (${bestRate.toFixed(2)}%)` : 'ไม่ทราบ';
 }
 
@@ -627,7 +651,7 @@ function getBestDropLocation(dropChances) {
 function generateFarmingEfficiency(materials) {
     const efficiencyContainer = document.getElementById('farming-efficiency');
     const playerShovelLevel = parseInt(document.getElementById('shovel-level').value);
-    
+
     // Calculate efficiency for each material
     const materialEfficiency = materials.map(material => {
         const oreInfo = findOreInfo(material.name);
@@ -639,16 +663,16 @@ function generateFarmingEfficiency(materials) {
                 accessible: false
             };
         }
-        
+
         // Find best accessible location
         let bestRate = 0;
         let bestLocation = '';
         let accessible = false;
-        
+
         Object.entries(oreInfo.dropChances).forEach(([location, chance]) => {
             const zoneInfo = getZoneInfo(location);
             const toughness = zoneInfo ? zoneInfo.shovelToughness : 1;
-            
+
             if (toughness <= playerShovelLevel) {
                 const match = chance.match(/\(([0-9.]+)%/);
                 if (match) {
@@ -661,11 +685,11 @@ function generateFarmingEfficiency(materials) {
                 }
             }
         });
-        
+
         // Calculate efficiency score (drop rate * value * quantity needed)
         const unitValue = material.unitValue || 0;
         const efficiency = bestRate * unitValue * material.totalQuantity;
-        
+
         return {
             ...material,
             efficiency: efficiency,
@@ -674,10 +698,10 @@ function generateFarmingEfficiency(materials) {
             accessible: accessible
         };
     });
-    
+
     // Sort by efficiency (highest first)
     const sortedByEfficiency = [...materialEfficiency].sort((a, b) => b.efficiency - a.efficiency);
-    
+
     // Group by location for route optimization
     const locationEfficiency = {};
     materialEfficiency.forEach(material => {
@@ -695,11 +719,11 @@ function generateFarmingEfficiency(materials) {
             locationEfficiency[material.bestLocation].totalValue += material.totalValue || 0;
         }
     });
-    
+
     const sortedLocations = Object.values(locationEfficiency).sort((a, b) => b.totalEfficiency - a.totalEfficiency);
-    
+
     let efficiencyHTML = '';
-    
+
     // Material efficiency ranking
     efficiencyHTML += `
         <div class="efficiency-section">
@@ -714,10 +738,10 @@ function generateFarmingEfficiency(materials) {
                                 <span class="rarity-badge rarity-${findOreInfo(material.name)?.rarity?.toLowerCase() || 'unknown'}">${findOreInfo(material.name)?.rarity || 'Unknown'}</span>
                             </div>
                             <div class="efficiency-details">
-                                ${material.accessible ? 
-                                    `📍 ${material.bestLocation} (${material.bestRate.toFixed(2)}%)` : 
-                                    '🚫 ไม่สามารถเข้าได้'
-                                }
+                                ${material.accessible ?
+            `📍 ${material.bestLocation} (${material.bestRate.toFixed(2)}%)` :
+            '🚫 ไม่สามารถเข้าได้'
+        }
                             </div>
                             ${material.unitValue > 0 ? `
                                 <div class="efficiency-value">
@@ -733,7 +757,7 @@ function generateFarmingEfficiency(materials) {
             </div>
         </div>
     `;
-    
+
     // Location efficiency ranking
     if (sortedLocations.length > 0) {
         efficiencyHTML += `
@@ -741,8 +765,8 @@ function generateFarmingEfficiency(materials) {
                 <h4>🗺️ Locations ที่คุ้มค่าที่สุด</h4>
                 <div class="efficiency-locations">
                     ${sortedLocations.slice(0, 3).map((location, index) => {
-                        const zoneInfo = getZoneInfo(location.location);
-                        return `
+            const zoneInfo = getZoneInfo(location.location);
+            return `
                             <div class="location-efficiency-item">
                                 <div class="location-rank">${index + 1}</div>
                                 <div class="location-info">
@@ -763,12 +787,12 @@ function generateFarmingEfficiency(materials) {
                                 </div>
                             </div>
                         `;
-                    }).join('')}
+        }).join('')}
                 </div>
             </div>
         `;
     }
-    
+
     // Farming tips
     efficiencyHTML += `
         <div class="efficiency-section">
@@ -795,7 +819,7 @@ function generateFarmingEfficiency(materials) {
             </div>
         </div>
     `;
-    
+
     efficiencyContainer.innerHTML = efficiencyHTML;
 }
 
@@ -803,10 +827,10 @@ function generateFarmingEfficiency(materials) {
 function generateFarmingRoute(materials) {
     const routeContainer = document.getElementById('farming-route');
     const playerShovelLevel = parseInt(document.getElementById('shovel-level').value);
-    
+
     // Group materials by their best locations
     const locationGroups = {};
-    
+
     materials.forEach(material => {
         const oreInfo = findOreInfo(material.name);
         if (oreInfo && oreInfo.locations) {
@@ -821,22 +845,22 @@ function generateFarmingRoute(materials) {
             });
         }
     });
-    
+
     // Separate accessible and inaccessible locations
     const accessibleLocations = [];
     const inaccessibleLocations = [];
-    
+
     Object.keys(locationGroups).forEach(location => {
         const zoneInfo = getZoneInfo(location);
         const toughness = zoneInfo ? zoneInfo.shovelToughness : 1;
-        
+
         if (toughness <= playerShovelLevel) {
             accessibleLocations.push(location);
         } else {
             inaccessibleLocations.push(location);
         }
     });
-    
+
     // Sort locations by shovel toughness (easier first)
     const sortedAccessible = accessibleLocations.sort((a, b) => {
         const zoneA = getZoneInfo(a);
@@ -845,7 +869,7 @@ function generateFarmingRoute(materials) {
         const toughnessB = zoneB ? zoneB.shovelToughness : 999;
         return toughnessA - toughnessB;
     });
-    
+
     const sortedInaccessible = inaccessibleLocations.sort((a, b) => {
         const zoneA = getZoneInfo(a);
         const zoneB = getZoneInfo(b);
@@ -853,18 +877,18 @@ function generateFarmingRoute(materials) {
         const toughnessB = zoneB ? zoneB.shovelToughness : 999;
         return toughnessA - toughnessB;
     });
-    
+
     // Generate route recommendations
     const accessibleRoute = [];
     const inaccessibleRoute = [];
     const collectedMaterials = new Set();
-    
+
     // Process accessible locations first
     sortedAccessible.forEach(location => {
-        const materialsInLocation = locationGroups[location].filter(material => 
+        const materialsInLocation = locationGroups[location].filter(material =>
             !collectedMaterials.has(material.name)
         );
-        
+
         if (materialsInLocation.length > 0) {
             const zoneInfo = getZoneInfo(location);
             accessibleRoute.push({
@@ -874,19 +898,19 @@ function generateFarmingRoute(materials) {
                 description: zoneInfo ? zoneInfo.description : '',
                 accessible: true
             });
-            
+
             materialsInLocation.forEach(material => {
                 collectedMaterials.add(material.name);
             });
         }
     });
-    
+
     // Process inaccessible locations
     sortedInaccessible.forEach(location => {
-        const materialsInLocation = locationGroups[location].filter(material => 
+        const materialsInLocation = locationGroups[location].filter(material =>
             !collectedMaterials.has(material.name)
         );
-        
+
         if (materialsInLocation.length > 0) {
             const zoneInfo = getZoneInfo(location);
             inaccessibleRoute.push({
@@ -898,10 +922,10 @@ function generateFarmingRoute(materials) {
             });
         }
     });
-    
+
     // Display farming route
     let routeHTML = '';
-    
+
     if (accessibleRoute.length > 0) {
         routeHTML += '<h4 style="color: #38a169; margin-bottom: 15px;">✅ พื้นที่ที่เข้าได้ (ตามความสามารถปัจจุบัน)</h4>';
         routeHTML += accessibleRoute.map((step, index) => `
@@ -929,7 +953,7 @@ function generateFarmingRoute(materials) {
             </div>
         `).join('');
     }
-    
+
     if (inaccessibleRoute.length > 0) {
         routeHTML += '<h4 style="color: #e53e3e; margin: 20px 0 15px 0;">🚫 พื้นที่ที่ยังเข้าไม่ได้ (ต้องอัพเกรด Shovel)</h4>';
         routeHTML += '<div class="capability-warning"><strong>คำแนะนำ:</strong> คุณต้องอัพเกรด Shovel Toughness เพื่อเข้าถึงพื้นที่เหล่านี้</div>';
@@ -958,10 +982,758 @@ function generateFarmingRoute(materials) {
             </div>
         `).join('');
     }
-    
+
     if (routeHTML === '') {
         routeHTML = '<p>ไม่พบข้อมูล location สำหรับ materials เหล่านี้</p>';
     }
-    
+
     routeContainer.innerHTML = routeHTML;
+}
+
+// Equipment Simulator Functions
+function populateSimulatorSelectors() {
+    const neckSelect = document.getElementById('neck-slot');
+    const charmSelect = document.getElementById('charm-slot');
+
+    // Clear existing options
+    neckSelect.innerHTML = '<option value="">-- เลือก Neck --</option>';
+    charmSelect.innerHTML = '<option value="">-- เลือก Charm --</option>';
+
+    if (!equipmentData.crafting) return;
+
+    // Get equipment by type from data.json
+    const neckItems = equipmentData.crafting.filter(item =>
+        item.type === 'Necklace' && equipmentStats[item.item]
+    );
+    const charmItems = equipmentData.crafting.filter(item =>
+        (item.type === 'Charm' || item.type === 'Amulet') && equipmentStats[item.item]
+    );
+
+    // Sort by rarity and cost
+    const rarityOrder = { 'Common': 1, 'Uncommon': 2, 'Rare': 3, 'Epic': 4, 'Legendary': 5, 'Mythical': 6 };
+
+    neckItems.sort((a, b) => {
+        const rarityDiff = (rarityOrder[a.rarity] || 0) - (rarityOrder[b.rarity] || 0);
+        if (rarityDiff !== 0) return rarityDiff;
+        return parseInt(a.cost.replace(/,/g, '')) - parseInt(b.cost.replace(/,/g, ''));
+    });
+
+    charmItems.sort((a, b) => {
+        const rarityDiff = (rarityOrder[a.rarity] || 0) - (rarityOrder[b.rarity] || 0);
+        if (rarityDiff !== 0) return rarityDiff;
+        return parseInt(a.cost.replace(/,/g, '')) - parseInt(b.cost.replace(/,/g, ''));
+    });
+
+    // Populate neck options
+    neckItems.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.item;
+        option.textContent = `${item.item} [${item.rarity}] - ${item.cost} เหรียญ`;
+        neckSelect.appendChild(option);
+    });
+
+    // Populate charm options
+    charmItems.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.item;
+        option.textContent = `${item.item} [${item.rarity}] - ${item.cost} เหรียญ`;
+        charmSelect.appendChild(option);
+    });
+}
+
+function setupSimulatorEventListeners() {
+    // Neck slot change
+    document.getElementById('neck-slot').addEventListener('change', function () {
+        simulatorEquipment.neck = {
+            item: this.value,
+            level: document.getElementById('neck-level').value
+        };
+        updateTotalStats();
+    });
+
+    document.getElementById('neck-level').addEventListener('change', function () {
+        if (simulatorEquipment.neck) {
+            simulatorEquipment.neck.level = this.value;
+            updateTotalStats();
+        }
+    });
+
+    // Charm slot change
+    document.getElementById('charm-slot').addEventListener('change', function () {
+        simulatorEquipment.charm = {
+            item: this.value,
+            level: document.getElementById('charm-level').value
+        };
+        updateTotalStats();
+    });
+
+    document.getElementById('charm-level').addEventListener('change', function () {
+        if (simulatorEquipment.charm) {
+            simulatorEquipment.charm.level = this.value;
+            updateTotalStats();
+        }
+    });
+}
+
+function initializeSimulator() {
+    // Initialize with empty rings array
+    simulatorEquipment.rings = [];
+    updateTotalStats();
+    updateRecommendations();
+}
+
+function addRingSlot() {
+    if (simulatorEquipment.rings.length >= 8) {
+        alert('สามารถใส่ Ring ได้สูงสุด 8 วง');
+        return;
+    }
+
+    const ringIndex = simulatorEquipment.rings.length;
+    const ringsContainer = document.getElementById('rings-container');
+
+    const ringDiv = document.createElement('div');
+    ringDiv.className = 'ring-item';
+    // Get ring items from data.json
+    const ringItems = equipmentData.crafting ? equipmentData.crafting.filter(item =>
+        item.type === 'Ring' && equipmentStats[item.item]
+    ) : [];
+
+    // Sort rings by rarity and cost
+    const rarityOrder = { 'Common': 1, 'Uncommon': 2, 'Rare': 3, 'Epic': 4, 'Legendary': 5, 'Mythical': 6 };
+    ringItems.sort((a, b) => {
+        const rarityDiff = (rarityOrder[a.rarity] || 0) - (rarityOrder[b.rarity] || 0);
+        if (rarityDiff !== 0) return rarityDiff;
+        return parseInt(a.cost.replace(/,/g, '')) - parseInt(b.cost.replace(/,/g, ''));
+    });
+
+    const ringOptions = ringItems.map(item =>
+        `<option value="${item.item}">${item.item} [${item.rarity}] - ${item.cost} เหรียญ</option>`
+    ).join('');
+
+    ringDiv.innerHTML = `
+        <select class="ring-select" data-index="${ringIndex}">
+            <option value="">-- เลือก Ring --</option>
+            ${ringOptions}
+        </select>
+        <div class="stat-level">
+            <label>ระดับ:</label>
+            <select class="ring-level" data-index="${ringIndex}">
+                <option value="min">น้อยสุด</option>
+                <option value="mid" selected>กลาง</option>
+                <option value="max">มากสุด</option>
+            </select>
+        </div>
+        <button class="remove-ring-btn" onclick="removeRingSlot(${ringIndex})">ลบ</button>
+    `;
+
+    ringsContainer.appendChild(ringDiv);
+
+    // Add event listeners for the new ring
+    const ringSelect = ringDiv.querySelector('.ring-select');
+    const ringLevel = ringDiv.querySelector('.ring-level');
+
+    ringSelect.addEventListener('change', function () {
+        updateRingData(ringIndex, this.value, ringLevel.value);
+    });
+
+    ringLevel.addEventListener('change', function () {
+        updateRingData(ringIndex, ringSelect.value, this.value);
+    });
+
+    // Add empty ring to data
+    simulatorEquipment.rings.push({ item: '', level: 'mid' });
+
+    // Update button state
+    updateAddRingButton();
+}
+
+function removeRingSlot(index) {
+    const ringsContainer = document.getElementById('rings-container');
+    const ringItems = ringsContainer.querySelectorAll('.ring-item');
+
+    if (ringItems[index]) {
+        ringItems[index].remove();
+        simulatorEquipment.rings.splice(index, 1);
+
+        // Re-index remaining rings
+        const remainingRings = ringsContainer.querySelectorAll('.ring-item');
+        remainingRings.forEach((ring, newIndex) => {
+            const select = ring.querySelector('.ring-select');
+            const level = ring.querySelector('.ring-level');
+            const button = ring.querySelector('.remove-ring-btn');
+
+            select.setAttribute('data-index', newIndex);
+            level.setAttribute('data-index', newIndex);
+            button.setAttribute('onclick', `removeRingSlot(${newIndex})`);
+        });
+
+        updateTotalStats();
+        updateAddRingButton();
+    }
+}
+
+function updateRingData(index, item, level) {
+    if (simulatorEquipment.rings[index]) {
+        simulatorEquipment.rings[index] = { item, level };
+        updateTotalStats();
+    }
+}
+
+function updateAddRingButton() {
+    const button = document.getElementById('add-ring-btn');
+    if (simulatorEquipment.rings.length >= 8) {
+        button.disabled = true;
+        button.textContent = 'Ring เต็มแล้ว (8/8)';
+    } else {
+        button.disabled = false;
+        button.textContent = `เพิ่ม Ring (${simulatorEquipment.rings.length}/8)`;
+    }
+}
+
+function getStatValue(equipmentName, statName, level) {
+    const equipment = equipmentStats[equipmentName];
+    if (!equipment || !equipment[statName]) return 0;
+
+    const statArray = equipment[statName];
+    switch (level) {
+        case 'min': return statArray[0];
+        case 'mid': return statArray[1];
+        case 'max': return statArray[2];
+        default: return statArray[1];
+    }
+}
+
+function updateTotalStats() {
+    const totalStats = {
+        luck: 0,
+        speed: 0,
+        power: 0
+    };
+
+    // Calculate neck stats
+    if (simulatorEquipment.neck && simulatorEquipment.neck.item) {
+        const neckStats = equipmentStats[simulatorEquipment.neck.item];
+        if (neckStats) {
+            Object.keys(neckStats).forEach(stat => {
+                totalStats[stat] += getStatValue(simulatorEquipment.neck.item, stat, simulatorEquipment.neck.level);
+            });
+        }
+    }
+
+    // Calculate charm stats
+    if (simulatorEquipment.charm && simulatorEquipment.charm.item) {
+        const charmStats = equipmentStats[simulatorEquipment.charm.item];
+        if (charmStats) {
+            Object.keys(charmStats).forEach(stat => {
+                totalStats[stat] += getStatValue(simulatorEquipment.charm.item, stat, simulatorEquipment.charm.level);
+            });
+        }
+    }
+
+    // Calculate rings stats
+    simulatorEquipment.rings.forEach(ring => {
+        if (ring.item) {
+            const ringStats = equipmentStats[ring.item];
+            if (ringStats) {
+                Object.keys(ringStats).forEach(stat => {
+                    totalStats[stat] += getStatValue(ring.item, stat, ring.level);
+                });
+            }
+        }
+    });
+
+    // Display total stats
+    displayTotalStats(totalStats);
+    updateRecommendations(totalStats);
+}
+
+function displayTotalStats(stats) {
+    const container = document.getElementById('total-stats');
+
+    container.innerHTML = `
+        <div class="stat-item">
+            <span class="stat-name">🍀 Luck</span>
+            <span class="stat-value ${stats.luck > 0 ? 'stat-boost' : 'stat-neutral'}">${stats.luck}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-name">⚡ Speed</span>
+            <span class="stat-value ${stats.speed > 0 ? 'stat-boost' : 'stat-neutral'}">${stats.speed}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-name">💪 Power</span>
+            <span class="stat-value ${stats.power > 0 ? 'stat-boost' : 'stat-neutral'}">${stats.power}</span>
+        </div>
+    `;
+}
+
+function updateRecommendations(currentStats = { luck: 0, speed: 0, power: 0 }) {
+    const container = document.getElementById('recommendations');
+
+    // Generate recommendations based on current stats
+    const recommendations = generateRecommendationsFromData(currentStats);
+
+    if (recommendations.length === 0) {
+        container.innerHTML = '<div class="no-recommendations">ไม่มีคำแนะนำเพิ่มเติม</div>';
+        return;
+    }
+
+    // Group recommendations by stat type
+    const groupedRecommendations = {
+        luck: recommendations.filter(r => r.targetStat === 'luck'),
+        speed: recommendations.filter(r => r.targetStat === 'speed'),
+        power: recommendations.filter(r => r.targetStat === 'power')
+    };
+
+    let html = '';
+
+    Object.keys(groupedRecommendations).forEach(statType => {
+        const recs = groupedRecommendations[statType];
+        if (recs.length > 0) {
+            const statEmoji = statType === 'luck' ? '🍀' : statType === 'speed' ? '⚡' : '💪';
+            const statName = statType === 'luck' ? 'Luck' : statType === 'speed' ? 'Speed' : 'Power';
+
+            html += `
+                <div class="recommendation-section">
+                    <div class="recommendation-title">
+                        ${statEmoji} เพิ่ม ${statName}
+                    </div>
+                    <div class="recommendation-list">
+                        ${recs.map(rec => `
+                            <div class="recommendation-item ${rec.priority}">
+                                <div class="recommendation-equipment">${rec.equipment}</div>
+                                <div class="recommendation-reason">${rec.reason}</div>
+                                <div class="recommendation-stats">
+                                    ${rec.statBoost > 0 ? `+${rec.statBoost} ${statName}` : ''}
+                                    ${rec.cost ? ` | ${rec.cost} เหรียญ` : ''}
+                                    ${rec.rarity ? ` | ${rec.rarity}` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+    });
+
+    container.innerHTML = html;
+}
+
+function generateRecommendations(currentStats) {
+    const recommendations = [];
+
+    // Check what equipment is currently equipped
+    const hasNeck = simulatorEquipment.neck && simulatorEquipment.neck.item;
+    const hasCharm = simulatorEquipment.charm && simulatorEquipment.charm.item;
+    const ringCount = simulatorEquipment.rings.filter(r => r.item).length;
+
+    if (!equipmentData.crafting) return recommendations;
+
+    // Recommendations for Luck
+    if (currentStats.luck < 10) {
+        if (!hasNeck) {
+            recommendations.push({
+                equipment: 'Lucky Necklace (มากสุด)',
+                reason: 'เพิ่ม Luck ได้มากที่สุดสำหรับ Neck slot',
+                targetStat: 'luck',
+                statBoost: 4,
+                priority: 'high-priority'
+            });
+        }
+
+        if (!hasCharm) {
+            recommendations.push({
+                equipment: 'Fortune Charm (มากสุด)',
+                reason: 'เพิ่ม Luck ได้มากที่สุดสำหรับ Charm slot',
+                targetStat: 'luck',
+                statBoost: 5,
+                priority: 'high-priority'
+            });
+        }
+
+        if (ringCount < 8) {
+            recommendations.push({
+                equipment: 'Rare Lucky Ring (มากสุด)',
+                reason: 'Ring ที่ให้ Luck สูงสุด',
+                targetStat: 'luck',
+                statBoost: 4,
+                priority: 'medium-priority'
+            });
+        }
+    }
+
+    // Recommendations for Speed
+    if (currentStats.speed < 10) {
+        if (!hasNeck) {
+            recommendations.push({
+                equipment: 'Speed Pendant (มากสุด)',
+                reason: 'เพิ่ม Speed ได้มากที่สุดสำหรับ Neck slot',
+                targetStat: 'speed',
+                statBoost: 5,
+                priority: 'high-priority'
+            });
+        }
+
+        if (!hasCharm) {
+            recommendations.push({
+                equipment: 'Swift Charm (มากสุด)',
+                reason: 'เพิ่ม Speed ได้มากที่สุดสำหรับ Charm slot',
+                targetStat: 'speed',
+                statBoost: 4,
+                priority: 'high-priority'
+            });
+        }
+
+        if (ringCount < 8) {
+            recommendations.push({
+                equipment: 'Rare Speed Ring (มากสุด)',
+                reason: 'Ring ที่ให้ Speed สูงสุด',
+                targetStat: 'speed',
+                statBoost: 4,
+                priority: 'medium-priority'
+            });
+        }
+    }
+
+    // Recommendations for Power
+    if (currentStats.power < 10) {
+        if (!hasNeck) {
+            recommendations.push({
+                equipment: 'Power Amulet (มากสุด)',
+                reason: 'เพิ่ม Power ได้มากที่สุดสำหรับ Neck slot',
+                targetStat: 'power',
+                statBoost: 4,
+                priority: 'high-priority'
+            });
+        }
+
+        if (!hasCharm) {
+            recommendations.push({
+                equipment: 'Strength Charm (มากสุด)',
+                reason: 'เพิ่ม Power ได้มากที่สุดสำหรับ Charm slot',
+                targetStat: 'power',
+                statBoost: 4,
+                priority: 'high-priority'
+            });
+        }
+
+        if (ringCount < 8) {
+            recommendations.push({
+                equipment: 'Rare Power Ring (มากสุด)',
+                reason: 'Ring ที่ให้ Power สูงสุด',
+                targetStat: 'power',
+                statBoost: 4,
+                priority: 'medium-priority'
+            });
+        }
+    }
+
+    // General recommendations
+    if (ringCount < 8) {
+        recommendations.push({
+            equipment: 'เพิ่ม Ring ให้ครบ 8 วง',
+            reason: 'เพิ่มพื้นที่สำหรับ stats เพิ่มเติม',
+            targetStat: 'luck',
+            statBoost: 0,
+            priority: 'low-priority'
+        });
+    }
+
+    // Balanced build recommendation
+    if (hasNeck && hasCharm && ringCount >= 4) {
+        const statDifference = Math.max(currentStats.luck, currentStats.speed, currentStats.power) -
+            Math.min(currentStats.luck, currentStats.speed, currentStats.power);
+
+        if (statDifference > 5) {
+            recommendations.push({
+                equipment: 'Balanced Charm หรือ Mystic Chain',
+                reason: 'สร้าง build ที่สมดุลมากขึ้น',
+                targetStat: 'luck',
+                statBoost: 0,
+                priority: 'medium-priority'
+            });
+        }
+    }
+
+    return recommendations;
+}
+
+// Process equipment data from data.json to create stats for simulator
+function processEquipmentStats() {
+    equipmentStats = {};
+
+    if (!equipmentData.crafting) return;
+
+    equipmentData.crafting.forEach(item => {
+        const stats = parseBuffsToStats(item.buffs);
+        if (Object.keys(stats).length > 0) {
+            equipmentStats[item.item] = stats;
+        }
+    });
+
+    console.log('Processed equipment stats:', equipmentStats);
+}
+
+// Parse buffs string to extract stats with min/mid/max values
+function parseBuffsToStats(buffsString) {
+    const stats = {};
+
+    if (!buffsString) return stats;
+
+    // Split by comma and process each buff
+    const buffs = buffsString.split(',');
+
+    buffs.forEach(buff => {
+        const trimmed = buff.trim();
+
+        // Match patterns like "Luck: 1-4", "Dig Speed: 10-40%", etc.
+        const luckMatch = trimmed.match(/Luck:\s*([0-9.]+)(?:-([0-9.]+))?/i);
+        const speedMatch = trimmed.match(/(?:Dig\s*Speed|Speed):\s*([0-9.]+)(?:-([0-9.]+))?%?/i);
+        const strengthMatch = trimmed.match(/(?:Dig\s*Strength|Strength):\s*([0-9.]+)(?:-([0-9.]+))?/i);
+        const capacityMatch = trimmed.match(/Capacity:\s*([0-9.]+)(?:-([0-9.]+))?/i);
+        const shakeSpeedMatch = trimmed.match(/Shake\s*Speed:\s*([0-9.]+)(?:-([0-9.]+))?%?/i);
+        const shakeStrengthMatch = trimmed.match(/Shake\s*Strength:\s*([0-9.]+)(?:-([0-9.]+))?/i);
+
+        // Process Luck
+        if (luckMatch) {
+            const min = parseFloat(luckMatch[1]);
+            const max = luckMatch[2] ? parseFloat(luckMatch[2]) : min;
+            const mid = (min + max) / 2;
+            stats.luck = [min, mid, max];
+        }
+
+        // Process Speed (combining Dig Speed and general Speed)
+        if (speedMatch) {
+            const min = parseFloat(speedMatch[1]);
+            const max = speedMatch[2] ? parseFloat(speedMatch[2]) : min;
+            const mid = (min + max) / 2;
+            // Convert percentage to points (divide by 10 for balance)
+            const speedMin = Math.max(1, Math.round(min / 10));
+            const speedMid = Math.max(1, Math.round(mid / 10));
+            const speedMax = Math.max(1, Math.round(max / 10));
+            stats.speed = [speedMin, speedMid, speedMax];
+        }
+
+        // Process Strength (combining Dig Strength and general Strength)
+        if (strengthMatch) {
+            const min = parseFloat(strengthMatch[1]);
+            const max = strengthMatch[2] ? parseFloat(strengthMatch[2]) : min;
+            const mid = (min + max) / 2;
+            stats.power = [min, mid, max];
+        }
+
+        // Process Capacity as a form of power
+        if (capacityMatch) {
+            const min = parseFloat(capacityMatch[1]);
+            const max = capacityMatch[2] ? parseFloat(capacityMatch[2]) : min;
+            const mid = (min + max) / 2;
+            // Convert capacity to power points (divide by 20 for balance)
+            const powerMin = Math.max(1, Math.round(min / 20));
+            const powerMid = Math.max(1, Math.round(mid / 20));
+            const powerMax = Math.max(1, Math.round(max / 20));
+
+            if (stats.power) {
+                stats.power[0] += powerMin;
+                stats.power[1] += powerMid;
+                stats.power[2] += powerMax;
+            } else {
+                stats.power = [powerMin, powerMid, powerMax];
+            }
+        }
+
+        // Process Shake Speed as additional speed
+        if (shakeSpeedMatch) {
+            const min = parseFloat(shakeSpeedMatch[1]);
+            const max = shakeSpeedMatch[2] ? parseFloat(shakeSpeedMatch[2]) : min;
+            const mid = (min + max) / 2;
+            // Convert percentage to points (divide by 15 for balance)
+            const speedMin = Math.max(1, Math.round(Math.abs(min) / 15));
+            const speedMid = Math.max(1, Math.round(Math.abs(mid) / 15));
+            const speedMax = Math.max(1, Math.round(Math.abs(max) / 15));
+
+            if (stats.speed) {
+                stats.speed[0] += speedMin;
+                stats.speed[1] += speedMid;
+                stats.speed[2] += speedMax;
+            } else {
+                stats.speed = [speedMin, speedMid, speedMax];
+            }
+        }
+
+        // Process Shake Strength as additional power
+        if (shakeStrengthMatch) {
+            const min = parseFloat(shakeStrengthMatch[1]);
+            const max = shakeStrengthMatch[2] ? parseFloat(shakeStrengthMatch[2]) : min;
+            const mid = (min + max) / 2;
+
+            if (stats.power) {
+                stats.power[0] += min;
+                stats.power[1] += mid;
+                stats.power[2] += max;
+            } else {
+                stats.power = [min, mid, max];
+            }
+        }
+    });
+
+    // Round all values
+    Object.keys(stats).forEach(stat => {
+        stats[stat] = stats[stat].map(val => Math.round(val * 10) / 10);
+    });
+
+    return stats;
+}
+// Find best equipment for a specific stat and type
+function findBestEquipmentForStat(statName, equipmentType, currentStats) {
+    if (!equipmentData.crafting) return null;
+
+    let typeFilter;
+    switch (equipmentType) {
+        case 'neck':
+            typeFilter = item => item.type === 'Necklace';
+            break;
+        case 'charm':
+            typeFilter = item => item.type === 'Charm' || item.type === 'Amulet';
+            break;
+        case 'ring':
+            typeFilter = item => item.type === 'Ring';
+            break;
+        default:
+            return null;
+    }
+
+    const availableItems = equipmentData.crafting.filter(item =>
+        typeFilter(item) && equipmentStats[item.item] && equipmentStats[item.item][statName]
+    );
+
+    if (availableItems.length === 0) return null;
+
+    // Sort by stat value (max level) descending
+    availableItems.sort((a, b) => {
+        const aStats = equipmentStats[a.item][statName];
+        const bStats = equipmentStats[b.item][statName];
+        const aMax = aStats ? aStats[2] : 0;
+        const bMax = bStats ? bStats[2] : 0;
+        return bMax - aMax;
+    });
+
+    const bestItem = availableItems[0];
+    const maxStatValue = equipmentStats[bestItem.item][statName][2];
+
+    return {
+        item: bestItem,
+        statBoost: maxStatValue,
+        equipment: `${bestItem.item} (มากสุด)`,
+        reason: `เพิ่ม ${getStatDisplayName(statName)} ได้มากที่สุดสำหรับ ${getTypeDisplayName(equipmentType)} slot`
+    };
+}
+
+function getStatDisplayName(statName) {
+    switch (statName) {
+        case 'luck': return 'Luck';
+        case 'speed': return 'Speed';
+        case 'power': return 'Power';
+        default: return statName;
+    }
+}
+
+function getTypeDisplayName(equipmentType) {
+    switch (equipmentType) {
+        case 'neck': return 'Neck';
+        case 'charm': return 'Charm';
+        case 'ring': return 'Ring';
+        default: return equipmentType;
+    }
+}
+
+// Updated generateRecommendations function
+function generateRecommendationsFromData(currentStats) {
+    const recommendations = [];
+
+    // Check what equipment is currently equipped
+    const hasNeck = simulatorEquipment.neck && simulatorEquipment.neck.item;
+    const hasCharm = simulatorEquipment.charm && simulatorEquipment.charm.item;
+    const ringCount = simulatorEquipment.rings.filter(r => r.item).length;
+
+    if (!equipmentData.crafting) return recommendations;
+
+    // Recommendations for each stat
+    const stats = ['luck', 'speed', 'power'];
+    const statThresholds = { luck: 50, speed: 20, power: 30 };
+
+    stats.forEach(statName => {
+        if (currentStats[statName] < statThresholds[statName]) {
+            // Neck recommendations
+            if (!hasNeck) {
+                const bestNeck = findBestEquipmentForStat(statName, 'neck', currentStats);
+                if (bestNeck) {
+                    recommendations.push({
+                        equipment: bestNeck.equipment,
+                        reason: bestNeck.reason,
+                        targetStat: statName,
+                        statBoost: bestNeck.statBoost,
+                        priority: 'high-priority',
+                        cost: bestNeck.item.cost,
+                        rarity: bestNeck.item.rarity
+                    });
+                }
+            }
+
+            // Charm recommendations
+            if (!hasCharm) {
+                const bestCharm = findBestEquipmentForStat(statName, 'charm', currentStats);
+                if (bestCharm) {
+                    recommendations.push({
+                        equipment: bestCharm.equipment,
+                        reason: bestCharm.reason,
+                        targetStat: statName,
+                        statBoost: bestCharm.statBoost,
+                        priority: 'high-priority',
+                        cost: bestCharm.item.cost,
+                        rarity: bestCharm.item.rarity
+                    });
+                }
+            }
+
+            // Ring recommendations
+            if (ringCount < 8) {
+                const bestRing = findBestEquipmentForStat(statName, 'ring', currentStats);
+                if (bestRing) {
+                    recommendations.push({
+                        equipment: bestRing.equipment,
+                        reason: bestRing.reason,
+                        targetStat: statName,
+                        statBoost: bestRing.statBoost,
+                        priority: 'medium-priority',
+                        cost: bestRing.item.cost,
+                        rarity: bestRing.item.rarity
+                    });
+                }
+            }
+        }
+    });
+
+    // General recommendations
+    if (ringCount < 8) {
+        recommendations.push({
+            equipment: 'เพิ่ม Ring ให้ครบ 8 วง',
+            reason: 'เพิ่มพื้นที่สำหรับ stats เพิ่มเติม',
+            targetStat: 'luck',
+            statBoost: 0,
+            priority: 'low-priority'
+        });
+    }
+
+    // Remove duplicates and sort by priority
+    const uniqueRecommendations = recommendations.filter((rec, index, self) =>
+        index === self.findIndex(r => r.equipment === rec.equipment)
+    );
+
+    const priorityOrder = { 'high-priority': 1, 'medium-priority': 2, 'low-priority': 3 };
+    uniqueRecommendations.sort((a, b) => {
+        const priorityDiff = (priorityOrder[a.priority] || 3) - (priorityOrder[b.priority] || 3);
+        if (priorityDiff !== 0) return priorityDiff;
+        return (b.statBoost || 0) - (a.statBoost || 0);
+    });
+
+    return uniqueRecommendations.slice(0, 10); // Limit to top 10 recommendations
 }

@@ -13,6 +13,7 @@
             <nav>
                 <button class="nav-btn active" data-tab="equipment">Equipment</button>
                 <button class="nav-btn" data-tab="calculator">Calculator</button>
+                <button class="nav-btn" data-tab="simulator">Equipment Simulator</button>
                 <button class="nav-btn" data-tab="ores">Ores</button>
                 <button class="nav-btn" data-tab="zones">Zones</button>
             </nav>
@@ -26,6 +27,70 @@
                     <input type="text" id="equipment-search" placeholder="ค้นหา equipment...">
                 </div>
                 <div id="equipment-list" class="grid-container"></div>
+            </div>
+
+            <!-- Equipment Simulator Tab -->
+            <div id="simulator" class="tab-content">
+                <h2>⚔️ Equipment Simulator</h2>
+                <div class="simulator-container">
+                    <div class="equipment-slots">
+                        <h3>🎒 Equipment Slots</h3>
+                        <div class="slots-grid">
+                            <!-- Neck Slot -->
+                            <div class="equipment-slot">
+                                <h4>📿 Neck</h4>
+                                <select id="neck-slot" class="equipment-select">
+                                    <option value="">-- เลือก Neck --</option>
+                                </select>
+                                <div class="stat-level">
+                                    <label>ระดับ:</label>
+                                    <select id="neck-level">
+                                        <option value="min">น้อยสุด</option>
+                                        <option value="mid" selected>กลาง</option>
+                                        <option value="max">มากสุด</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Charm Slot -->
+                            <div class="equipment-slot">
+                                <h4>🔮 Charm</h4>
+                                <select id="charm-slot" class="equipment-select">
+                                    <option value="">-- เลือก Charm --</option>
+                                </select>
+                                <div class="stat-level">
+                                    <label>ระดับ:</label>
+                                    <select id="charm-level">
+                                        <option value="min">น้อยสุด</option>
+                                        <option value="mid" selected>กลาง</option>
+                                        <option value="max">มากสุด</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Rings Slots -->
+                            <div class="equipment-slot rings-slot">
+                                <h4>💍 Rings (สูงสุด 8)</h4>
+                                <div id="rings-container">
+                                    <!-- Ring slots will be generated dynamically -->
+                                </div>
+                                <button id="add-ring-btn" class="add-ring-btn">เพิ่ม Ring</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-display">
+                        <h3>📊 Total Stats</h3>
+                        <div id="total-stats" class="stats-container">
+                            <!-- Stats will be calculated and displayed here -->
+                        </div>
+                        
+                        <h3>💡 แนะนำ Equipment</h3>
+                        <div id="recommendations" class="recommendations-container">
+                            <!-- Recommendations will be displayed here -->
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Calculator Tab -->
